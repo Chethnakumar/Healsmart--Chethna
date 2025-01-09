@@ -83,21 +83,11 @@
     <i class="fas fa-user-circle profile-icon">
     </i>
     <div class="dropdown">
-     <a href="#">
-      Home
-     </a>
-     <a href="#">
-      Profile
-     </a>
-     <a href="#">
-      Appointments
-     </a>
-     <a href="#">
-      Availability
-     </a>
-     <a href="#">
-      Logout
-     </a>
+     <a href="DH.html">Home</a>
+     <a href="DoctorProfile.html">Profile</a>
+     <a href="DHManageAppointment.html">Appointments</a>
+     <a href="DHAddAvailability.html">Availability</a>
+     <a href="#" onclick="confirmLogout()">Logout</a>
     </div>
    </div>
   </header>
@@ -163,7 +153,7 @@
       </div>
       <div class="space-x-2">
        <button class="bg-purple-600 text-white px-4 py-2 rounded">
-        View Profile
+        <a href="DHViewProfile.html">View Profile</a>
        </button>
        <button class="bg-black text-white px-4 py-2 rounded">
         Initiate Call
@@ -190,7 +180,7 @@
       </div>
       <div class="space-x-2">
        <button class="bg-purple-600 text-white px-4 py-2 rounded">
-        View Profile
+        <a href="DHViewProfile.html">View Profile</a>
        </button>
        <button class="bg-black text-white px-4 py-2 rounded">
         Initiate Call
@@ -217,7 +207,7 @@
       </div>
       <div class="space-x-2">
        <button class="bg-purple-600 text-white px-4 py-2 rounded">
-        View Profile
+        <a href="DHViewProfile.html">View Profile</a>
        </button>
        <button class="bg-black text-white px-4 py-2 rounded">
         Initiate Call
@@ -244,7 +234,7 @@
       </div>
       <div class="space-x-2">
        <button class="bg-purple-600 text-white px-4 py-2 rounded">
-        View Profile
+        <a href="DHViewProfile.html">View Profile</a>
        </button>
        <button class="bg-black text-white px-4 py-2 rounded">
         Initiate Call
@@ -271,7 +261,7 @@
       </div>
       <div class="space-x-2">
        <button class="bg-purple-600 text-white px-4 py-2 rounded">
-        View Profile
+        <a href="DHViewProfile.html">View Profile</a>
        </button>
        <button class="bg-black text-white px-4 py-2 rounded">
         Initiate Call
@@ -330,5 +320,15 @@
     </p>
    </div>
   </footer>
+  <script>
+
+function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
+    }
+
+  </script>
  </body>
 </html>
