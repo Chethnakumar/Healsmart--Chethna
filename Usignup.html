@@ -234,6 +234,7 @@
  
 
   <script>
+    
     function validateForm() {
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
@@ -291,6 +292,13 @@
       alert('There was an issue with the signup. Please try again later.');
     }
   }
+
+  function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
+    }
 
   </script>
 </body>

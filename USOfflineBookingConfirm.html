@@ -234,9 +234,9 @@
           <a href="USHomePage.html">Home</a>
           <a href="USProfile.html">Profile</a>
           <a href="USPrevention.html">Prevention</a>
-          <a href="USBookConsultation.html">Recovery</a>
+          <a href="USBookConsultation.html">Consultation</a>
           <a href="USMyBookings.html">My Bookings</a>
-          <a href="LOGOUT.html">Logout</a>
+          <a href="#" onclick="confirmLogout()">Logout</a>
         </div>
       </div>
     </header>
@@ -257,7 +257,7 @@
 
         <div class="form-group">
           <label for="date-select">Select Date:</label>
-          <select id="date-select" name="date-select" onchange="updateTimeSlots()">
+          <select id="date-select" name="date-select" onchange="updateTimeSlots()" required>
             <option value="">--Choose a Date--</option>
             <option value="2025-01-10">January 10, 2025</option>
             <option value="2025-01-12">January 12, 2025</option>
@@ -267,13 +267,13 @@
 
         <div class="form-group">
           <label for="time-select">Select Time Slot:</label>
-          <select id="time-select" name="time-select">
+          <select id="time-select" name="time-select" required>
             <option value="">--Choose a Time Slot--</option>
           </select>
         </div>
 
         <div class="confirm-button">
-          <a href="OfflineBookingConfirmation.html">Confirm Booking</a>
+          <a href="USPayment.html">Confirm Booking</a>
         </div>
       </div>
     </main>
@@ -290,7 +290,7 @@
       </div>
 
       <div class="contact-us">
-        <p>Contact Us</p>
+        <a href="USContactUs.html">Contact Us</a>
         <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
       </div>
 
@@ -337,6 +337,13 @@
           timeSelect.appendChild(option);
         });
       }
+
+      function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
+    }
     </script>
   </body>
 </html>

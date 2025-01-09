@@ -211,11 +211,11 @@
     <div class="profile" onclick="toggleDropdown()">
       <i class="fas fa-user-circle profile-icon"></i>
       <div class="dropdown">
-        <a href="#">Home</a>
-        <a href="#">Profile</a>
-        <a href="#">Appointments</a>
-        <a href="#">Availability</a>
-        <a href="#">Logout</a>
+        <a href="DH.html">Home</a>
+        <a href="DoctorProfile.html">Profile</a>
+        <a href="DHManageAppointment.html">Appointments</a>
+        <a href="DHAddAvailability.html">Availability</a>
+        <a href="#" onclick="confirmLogout()">Logout</a>
       </div>
     </div>
   </header>
@@ -237,7 +237,7 @@
             <p>Purpose: Prevention Consultation</p>
             <p>Status: Online Consultation</p>
           </div>
-          <button class="view-profile-btn">View Profile</button>
+          <button class="view-profile-btn"><a href="DHViewProfile.html">View Profile</a></button>
         </div>
 
         <!-- Repeat the above structure for other appointment cards -->
@@ -260,7 +260,7 @@
             <p>Purpose: Prevention Consultation</p>
             <p>Status: Online Consultation</p>
           </div>
-          <button class="view-profile-btn">View Profile</button>
+          <button class="view-profile-btn"><a href="DHViewProfile.html">View Profile</a></button>
         </div>
 
         <!-- Repeat the above structure for other appointment cards -->
@@ -268,5 +268,13 @@
       </div>
     </div>
   </div>
+  <script>
+            function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
+    }
+  </script>
 </body>
 </html>

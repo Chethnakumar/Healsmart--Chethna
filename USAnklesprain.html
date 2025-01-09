@@ -187,12 +187,12 @@
     <div class="profile" onclick="toggleDropdown()">
         <i class="fas fa-user-circle profile-icon"></i>
         <div class="dropdown">
-            <a href="#">Home</a>
-            <a href="#">Profile</a>
-            <a href="#">Prevention</a>
-            <a href="#">Recovery</a>
-            <a href="#">My Bookings</a>
-            <a href="#">Logout</a>
+            <a href="USHomePage.html">Home</a>
+            <a href="USProfile.html">Profile</a>
+            <a href="USPrevention.html">Prevention</a>
+            <a href="USBookConsultation.html">Consultation</a>
+            <a href="USMyBookings.html">My Bookings</a>
+            <a href="#" onclick="confirmLogout()">Logout</a>
         </div>
     </div>
 </header>
@@ -296,6 +296,13 @@
     function toggleDropdown() {
         const profile = document.querySelector('.profile');
         profile.classList.toggle('active');
+    }
+
+    function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
     }
 </script>
 
