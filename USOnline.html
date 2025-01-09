@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Booking - HealSmart</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+      .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px; /* Width of the dropdown */
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap; /* Prevent text from wrapping */
+            border-bottom: 1px solid #f1f1f1; /* Adds separation between links */
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none; /* Remove border from last item */
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+
+      .main-content {
+        padding: 50px 20px;
+        text-align: center;
+        min-height: 570px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .booking-container {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        padding: 60px;
+        margin: 0 auto;
+        text-align: left;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+      select,
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+      }
+      .time-slots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .time-slot {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .time-slot:hover {
+        background-color: #218838;
+      }
+      .time-slot.active {
+        background-color: #155724;
+      }
+      .confirm-button {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .confirm-button a {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+      }
+      .confirm-button a:hover {
+        background-color: #0056b3;
+      }
+      .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info,
+            .social-contact,
+            .contact-us {
+                flex: none;
+                width: 100%;
+            }
+
+            .social-contact {
+                margin-top: 20px;
+            }
+
+            .contact-us {
+                margin-top: 20px;
+            }
+        }
+    </style>
+    <script>
+      function updateDates() {
+        const doctor = document.getElementById("doctor-select").value;
+        const dateSelect = document.getElementById("date-select");
+        dateSelect.innerHTML = "<option value=''>--Choose a Date--</option>";
+
+        if (doctor) {
+          // Example data; replace with real data
+          const availableDates = {
+            "Dr. John Doe": ["2024-12-30", "2024-12-31", "2025-01-02"],
+            "Dr. Jane Smith": ["2024-12-28", "2024-12-29", "2024-12-31"],
+          };
+
+          (availableDates[doctor] || []).forEach((date) => {
+            const option = document.createElement("option");
+            option.value = date;
+            option.textContent = date;
+            dateSelect.appendChild(option);
+          });
+        }
+      }
+
+      function showAvailableSlots() {
+        const doctor = document.getElementById("doctor-select").value;
+        const date = document.getElementById("date-select").value;
+        const slotsContainer = document.getElementById("slots-container");
+
+        // Clear existing slots
+        slotsContainer.innerHTML = "";
+
+        if (doctor && date) {
+          // Example slot data; replace with actual data fetched from the backend
+          const slots = {
+            "Dr. John Doe": {
+              "2024-12-30": ["10:00 AM", "11:30 AM", "1:00 PM"],
+              "2024-12-31": ["2:00 PM", "3:30 PM", "5:00 PM"],
+              "2025-01-02": ["9:00 AM", "12:30 PM", "4:00 PM"],
+            },
+            "Dr. Jane Smith": {
+              "2024-12-28": ["10:00 AM", "11:30 AM", "1:00 PM"],
+              "2024-12-29": ["3:00 PM", "4:30 PM", "6:00 PM"],
+              "2024-12-31": ["9:00 AM", "2:00 PM", "5:00 PM"],
+            },
+          };
+
+          const selectedSlots = (slots[doctor] || {})[date] || [];
+
+          if (selectedSlots.length > 0) {
+            selectedSlots.forEach((slot) => {
+              const slotElement = document.createElement("div");
+              slotElement.className = "time-slot";
+              slotElement.innerText = slot;
+              slotElement.onclick = () => selectSlot(slotElement);
+              slotsContainer.appendChild(slotElement);
+            });
+          } else {
+            slotsContainer.innerText = "No slots available.";
+          }
+        }
+      }
+
+      function selectSlot(slotElement) {
+        // Remove active class from all slots
+        document
+          .querySelectorAll(".time-slot")
+          .forEach((el) => el.classList.remove("active"));
+
+        // Add active class to the selected slot
+        slotElement.classList.add("active");
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="left">
+            <img alt="HealSmart Logo" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+            <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="USHomePage.html">Home</a>
+                <a href="USProfile.html">Profile</a>
+                <a href="USPrevention.html">Prevention</a>
+                <a href="USBookConsultation.html">Recovery</a>
+                <a href="USMyBookings.html">My Bookings</a>
+                <a href="LOGOUT.html">Logout</a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2>Book an Online Consultation</h2>
+      <p>Connect with a specialist from the comfort of your home.</p>
+
+      <div class="booking-container">
+        <!-- Doctor Selection -->
+        <div class="form-group">
+          <label for="doctor-select">Select Doctor:</label>
+          <select
+            id="doctor-select"
+            name="doctor-select"
+            onchange="updateDates()"
+          >
+            <option value="">--Choose a Doctor--</option>
+            <option value="Dr. John Doe">Dr. John Doe (Physiotherapist)</option>
+            <option value="Dr. Jane Smith">
+              Dr. Jane Smith (Nutritionist)
+            </option>
+          </select>
+        </div>
+
+        <!-- Date Selection -->
+        <div class="form-group">
+          <label for="date-select">Select Date:</label>
+          <select
+            id="date-select"
+            name="date-select"
+            onchange="showAvailableSlots()"
+          >
+            <option value="">--Choose a Date--</option>
+          </select>
+        </div>
+
+        <!-- Time Slots -->
+        <div class="form-group">
+          <label>Available Time Slots:</label>
+          <div id="slots-container" class="time-slots">
+            <p>Select a doctor and date to view slots.</p>
+          </div>
+        </div>
+
+        <!-- Confirm Button -->
+        <div class="confirm-button">
+          <a href="USOnlineDOCDetail.html">Confirm Booking</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +1 123 456 7890</p>
+        </div>
+
+        <div class="contact-us">
+            <p>Contact Us</p>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
+        </div>
+
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            const profile = document.querySelector('.profile');
+            profile.classList.toggle('active');
+        }
+    </script>
+  </body>
+</html>

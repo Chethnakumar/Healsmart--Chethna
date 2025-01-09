@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealSmart - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome -->
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* margin-bottom: 10px; */
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px;
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #6a78db, #5f63e4);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            margin: 20px 0;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            color: #5f63e4;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .feature a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature a:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .get-started a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .get-started a:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info,
+            .social-contact,
+            .contact-us {
+                flex: none;
+                width: 100%;
+            }
+
+            .social-contact {
+                margin-top: 20px;
+            }
+
+            .contact-us {
+                margin-top: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+   <header class="header">
+        <div class="left">
+            <img src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" alt="HealSmart Logo">
+            <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="Login.html">Login</a>
+                <a href="Usignup.html">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero get-started" >
+        <h2>Welcome to HealSmart</h2>
+        <p>Your guide to injury prevention and recovery, personalized to your needs.</p><br><br>
+        <a href="Usignup.html" > Get Started</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <!-- Prevention Guide -->
+        <div class="feature">
+            <h3>Prevention Guide</h3>
+            <p>Stay ahead of injuries with our personalized prevention guide.</p>
+            <a href="#" onclick="checkLoginStatus('prevention')">Access Prevention Guide</a>
+        </div>
+
+        <!-- Recovery Consultation -->
+        <div class="feature">
+            <h3>Recovery Consultation</h3>
+            <p>Consult with experts to manage your recovery process.</p>
+            <a href="#" onclick="checkLoginStatus('recovery')">Book a Recovery Consultation</a>
+        </div>
+
+        <!-- Track Booking -->
+        <div class="feature">
+            <h3>Track Booking</h3>
+            <p>Keep track of your consultations and appointments.</p>
+            <a href="#" onclick="checkLoginStatus('track')">View My Bookings</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +1 123 456 7890</p>
+        </div>
+
+        <div class="contact-us">
+            <a href="USContactUs.html">Contact Us</a>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
+        </div>
+
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
+    </footer>
+    <script>
+        function toggleDropdown() {
+            const profile = document.querySelector('.profile');
+            profile.classList.toggle('active');
+        }
+</script>
+    <script>
+        let isLoggedIn = false; // Track login status (this would be dynamic in a real app)
+        let featureToAccess = ''; // Store the feature the user tried to access
+
+        // Simulate login check
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'user' && password === 'password') {
+                isLoggedIn = true;
+                alert('Login successful!');
+                document.getElementById('login-form').style.display = 'none';
+                checkLoginStatus();
+            } else {
+                alert('Invalid login credentials.');
+            }
+        }
+
+        // Toggle the login form visibility
+        function toggleLoginForm() {
+            document.getElementById('login-form').style.display = isLoggedIn ? 'none' : 'block';
+        }
+
+        // Check login status before accessing a feature
+        function checkLoginStatus(feature) {
+            if (!isLoggedIn) {
+                featureToAccess = feature;
+                alert('Please log in to access this feature.');
+                toggleLoginForm(); // Show login form
+            } else {
+                // Redirect to the feature page
+                window.location.href = feature + '.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

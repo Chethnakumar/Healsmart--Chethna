@@ -1,0 +1,510 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HealSmart
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* margin-bottom: 10px; */
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px;
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('./Images/extended_design_image.jpeg') no-repeat center center;
+            background-size: cover;
+            padding: 20px;
+        }
+        .outer-box {
+            background-color: #c5cae9;
+            padding: 10px; /* Adjusted padding to be 10px more than inner box */
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 100%; /* Full width of container */
+            max-width: 744px; /* Adjusted max-width to be 10px more than inner box */
+            height: 420px; /* Adjusted height to be 10px more than inner box */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .profile-card {
+            background-color: #d1c4e9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 95%; /* Full width of outer box */
+            height: auto;
+            position: relative;
+        }
+        .profile-card .profile-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            background-color: #00b0ff;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .profile-card .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-card .info p {
+            margin: 5px 0;
+        }
+        .profile-card .buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-card .buttons button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .profile-card .buttons button:hover {
+            background-color: #333333;
+        }
+        .profile-card .documents {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .profile-card .documents button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .profile-card .documents button:hover {
+            background-color: #333333;
+        }
+        .profile-card .license-number {
+            background-color: #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .profile-card .license-label {
+            color: black;
+            margin-top: 10px;
+        }
+        .profile-card .rejection {
+            display: none;
+            flex-direction: column;
+            margin-top: 10px;
+            position: absolute;
+            top: 120px;
+            right: 20px;
+        }
+        .profile-card .rejection textarea {
+            width: 200px;
+            height: 100px; /* Increased height */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .profile-card .rejection button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .profile-card .rejection button:hover {
+            background-color: #333333;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            border-top: 5px solid #000;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        .footer .contact-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .contact-info img {
+            height: 50px;
+            vertical-align: middle;
+        }
+        .footer .contact-info h1 {
+            display: inline;
+            margin-left: 10px;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+        .footer .contact-info p {
+            margin: 5px 0;
+        }
+        .footer .links {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .links p {
+            margin: 5px 0;
+        }
+        .footer .bottom-links {
+            width: 100%;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .footer .bottom-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer .bottom-links a:hover {
+            text-decoration: underline;
+        }
+        .footer .copyright {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+        .footer .links-container {
+            display: flex;
+            flex: 2;
+            justify-content: space-between;
+        }
+        .footer .policies {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .footer .contact-details {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: right;
+        }
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer .policies, .footer .contact-info, .footer .copyright, .footer .contact-details {
+                text-align: left;
+                margin-top: 10px;
+                position: static;
+                transform: none;
+            }
+        }
+        .back-button {
+            margin: 20px;
+            background-color: #bfa2db;
+            border: none;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 80px; /* Adjusted to place below the header */
+            left: 20px;
+        }
+        .nav-button {
+            background-color: #bfa2db;
+            border: none;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-button.prev {
+            top: 10px;
+            right: 70px; /* Moved 10px to the left */
+        }
+        .nav-button.next {
+            top: 10px;
+            right: 20px; /* Moved 10px to the left */
+        }
+        .verify {
+            position: absolute;
+            top: 10px;
+            left: 20px; /* Moved 10px to the right */
+        }
+        .verify h2 {
+            margin-top: 0;
+        }
+  </style>
+  <script>
+   function toggleRejection() {
+        var rejectionDiv = document.getElementById('rejection-div');
+        if (rejectionDiv.style.display === "none" || rejectionDiv.style.display === "") {
+            rejectionDiv.style.display = "flex";
+        } else {
+            rejectionDiv.style.display = "none";
+        }
+    }
+
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById('dropdown-menu');
+        if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+            dropdownMenu.style.display = "block";
+        } else {
+            dropdownMenu.style.display = "none";
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.querySelector('.profile').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('dropdown-menu').style.display = 'none';
+        }
+    });
+  </script>
+ </head>
+ <body>
+    <header class="header">
+        <div class="left">
+         <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="40"/>
+         <h1>
+          HealSmart
+         </h1>
+        </div>
+        <nav>
+         <div class="profile">
+          <i class="fas fa-user-circle profile-icon" onclick="toggleDropdown()">
+          </i>
+          <div class="dropdown" id="dropdown-menu">
+             <a href="#">
+                 Home
+                </a>
+                <a href="#">
+                 Manage Booking
+                </a>
+                <a href="#">
+                 Manage Doctors
+                </a>
+           </a>
+           <a href="#">
+            Log Out
+           </a>
+          </div>
+         </div>
+        </nav>
+       </header>
+  <button class="back-button">
+   <i class="fas fa-arrow-left">
+   </i>
+  </button>
+  <div class="container">
+   <div class="outer-box">
+    <div class="verify">
+     <h2>
+      Verify
+     </h2>
+    </div>
+    <button class="nav-button prev">
+     <i class="fas fa-arrow-left">
+     </i>
+    </button>
+    <button class="nav-button next">
+     <i class="fas fa-arrow-right">
+     </i>
+    </button>
+    <div class="profile-card">
+     <div class="profile-header">
+      <img alt="Doctor's Profile Picture" height="100" src="https://storage.googleapis.com/a1aa/image/AOH2NGo6kcLDEFDJfcUCkSVS2xV9gfaO3jSlm6Tt8sKmN08TA.jpg" width="100"/>
+      <div class="info">
+       <p>
+        Name: Doctor I
+       </p>
+       <p>
+        Doctor Type: Physio Therapist
+       </p>
+       <p>
+        E-Mail: Doctor1@gmail.com
+       </p>
+       <p>
+        Gender: Male
+       </p>
+       <p>
+        Phone no: 12356790
+       </p>
+      </div>
+     </div>
+     <div class="documents">
+      <button>
+       View Latest Degree Certificate
+      </button>
+      <button>
+       View Government ID Proof
+      </button>
+      <p class="license-label">
+       Medical License Number:
+       <span class="license-number">
+        1236547890025
+       </span>
+      </p>
+     </div>
+     <div class="buttons">
+      <button>
+       Accept
+      </button>
+      <button onclick="toggleRejection()">
+       Reject
+      </button>
+      <div class="rejection" id="rejection-div">
+       <textarea placeholder="Reason for Rejection"></textarea>
+       <button>
+        Send
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <footer class="footer">
+   <div class="contact-info">
+    <img alt="HealSmart Logo" height="50" src="./Images/logo.jpg" width="50"/>
+    <h1>
+     HealSmart
+    </h1>
+   </div>
+   <div class="links">
+    <p>
+    </p>
+   </div>
+   <div class="bottom-links">
+    <p>
+    </p>
+   </div>
+   <div class="contact-details" style="bottom: 30px;">
+    <p>
+     Email: info@healsmart.com
+    </p>
+    <p>
+     Phone: +91 96222 84676
+    </p>
+   </div>
+   <div class="policies">
+    <p>
+     <a href="#" style="color: #fff; text-decoration: none;">
+      Privacy Policy
+     </a>
+     |
+     <a href="#" style="color: #fff; text-decoration: none;">
+      Terms and Conditions
+     </a>
+    </p>
+   </div>
+   <div class="copyright">
+    <p>
+     © 2023 HealSmart
+    </p>
+   </div>
+  </footer>
+ </body>
+</html>

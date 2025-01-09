@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - HealSmart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fb;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px;
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info,
+            .social-contact,
+            .contact-us {
+                flex: none;
+                width: 100%;
+            }
+
+            .social-contact {
+                margin-top: 20px;
+            }
+
+            .contact-us {
+                margin-top: 20px;
+            }
+        }
+
+        /* Page content styles */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .tabs button {
+            flex: 1;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .tabs button.active {
+            color: #3498db;
+            font-weight: bold;
+            border-bottom: 3px solid #3498db;
+        }
+
+        .booking-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .write-review-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .write-review-btn:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .booking-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="left">
+            <img src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" alt="HealSmart Logo">
+            <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="#">Home</a>
+                <a href="#">Profile</a>
+                <a href="#">Prevention</a>
+                <a href="#">Recovery</a>
+                <a href="#">My Bookings</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="active" onclick="showSection('upcoming')">Upcoming Appointments</button>
+            <button onclick="showSection('past')">Past Appointments</button>
+        </div>
+
+        <!-- Sections -->
+        <div id="upcoming" class="section">
+            <div class="booking-cards">
+                <div class="card">
+                    <h3>Dr. John Doe</h3>
+                    <p>Speciality: Orthopedics</p>
+                    <p>Date: 2024-12-30</p>
+                    <p>Time: 10:00 AM</p>
+                </div>
+            </div>
+        </div>
+        <div id="past" class="section" style="display: none;">
+            <div class="booking-cards">
+                <div class="card">
+                    <h3>Dr. Alice Brown</h3>
+                    <p>Speciality: Dermatology</p>
+                    <p>Date: 2024-11-20</p>
+                    <p>Time: 11:00 AM</p>
+                    <a href="USReview.html"><button class="write-review-btn" onclick="openReviewModal()">Write Review</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +1 123 456 7890</p>
+        </div>
+
+        <div class="contact-us">
+            <a href="#">Contact Us</a>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
+        </div>
+
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
+    </footer>
+    <script>
+        function toggleDropdown() {
+            const profile = document.querySelector('.profile');
+            profile.classList.toggle('active');
+        }
+
+        function showSection(section) {
+            document.getElementById('upcoming').style.display = section === 'upcoming' ? 'block' : 'none';
+            document.getElementById('past').style.display = section === 'past' ? 'block' : 'none';
+
+            const tabs = document.querySelectorAll('.tabs button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`.tabs button[onclick="showSection('${section}')"]`).classList.add('active');
+        }
+
+        function openReviewModal() {
+            alert("This will open the review modal or redirect to the review page.");
+            // Implement modal or redirection functionality here
+        }
+    </script>
+</body>
+</html>

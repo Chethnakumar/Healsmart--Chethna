@@ -1,0 +1,334 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HealSmart Dashboard
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .header {
+            background-color: #bfa2db;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+        .header .left img {
+            height: 40px;
+        }
+        .header .left h1 {
+            margin: 0 0 0 10px;
+            font-size: 24px;
+            color: black;
+        }
+        .header .profile {
+            position: relative;
+            display: inline-block;
+        }
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+        }
+        .header .profile .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 20px;
+            width: 150px;
+        }
+        .header .profile .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 20px;
+        }
+        .header .profile .dropdown a:hover {
+            background-color: #ddd;
+        }
+        .header .profile.active .dropdown {
+            display: block;
+        }
+        .scrollable-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+  </style>
+  <script>
+   function toggleDropdown() {
+            document.querySelector('.profile').classList.toggle('active');
+        }
+  </script>
+ </head>
+ <body class="bg-gray-100">
+  <header class="header">
+   <div class="left">
+    <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+    <h1>
+     HealSmart
+    </h1>
+   </div>
+   <div class="profile" onclick="toggleDropdown()">
+    <i class="fas fa-user-circle profile-icon">
+    </i>
+    <div class="dropdown">
+     <a href="#">
+      Home
+     </a>
+     <a href="#">
+      Profile
+     </a>
+     <a href="#">
+      Appointments
+     </a>
+     <a href="#">
+      Availability
+     </a>
+     <a href="#">
+      Logout
+     </a>
+    </div>
+   </div>
+  </header>
+  <main class="p-4">
+   <section class="text-center my-8">
+    <h1 class="text-3xl md:text-5xl font-bold">
+     Welcome, Dr. UserName!
+    </h1>
+   </section>
+   <section class="bg-gray-400 p-4 md:p-8 rounded-lg mb-4 mx-auto" style="max-width: 1100px;">
+    <h2 class="text-2xl md:text-3xl font-semibold mb-4">
+     For your Information
+    </h2>
+    <div class="bg-gray-200 p-4 md:p-8 rounded-lg scrollable-content">
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; You have 5 appointments Today
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+     <p class="text-xl md:text-2xl mb-2">
+      -&gt; Your Patient PATIENTNAME have added Review for your work
+     </p>
+    </div>
+   </section>
+   <section class="bg-gray-400 p-4 md:p-8 rounded-lg mb-4 mx-auto" style="max-width: 1100px;">
+    <h2 class="text-2xl md:text-3xl font-semibold mb-2">
+     Today's Schedule
+    </h2>
+    <div class="bg-gray-200 p-4 rounded-lg space-y-4 scrollable-content" style="max-height: 600px;">
+     <div class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center mb-4 md:mb-0">
+       <img alt="Patient Image" class="h-36 w-32 mr-4" height="150" src="https://storage.googleapis.com/a1aa/image/sQFZ3YJcUB75Fx72kpPHeYG8lKigDnMHMcWTjyPVqBwZWBfTA.jpg" width="120"/>
+       <div class="text-xl md:text-2xl">
+        <p>
+         Name: Patient I
+        </p>
+        <p>
+         Time: 13:45 - 14:15
+        </p>
+        <p>
+         Purpose: Prevention Consultation
+        </p>
+        <p>
+         Status: Online Consultation
+        </p>
+       </div>
+      </div>
+      <div class="space-x-2">
+       <button class="bg-purple-600 text-white px-4 py-2 rounded">
+        View Profile
+       </button>
+       <button class="bg-black text-white px-4 py-2 rounded">
+        Initiate Call
+       </button>
+      </div>
+     </div>
+     <div class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center mb-4 md:mb-0">
+       <img alt="Patient Image" class="h-36 w-32 mr-4" height="150" src="https://storage.googleapis.com/a1aa/image/sQFZ3YJcUB75Fx72kpPHeYG8lKigDnMHMcWTjyPVqBwZWBfTA.jpg" width="120"/>
+       <div class="text-xl md:text-2xl">
+        <p>
+         Name: Patient II
+        </p>
+        <p>
+         Time: 14:30 - 15:00
+        </p>
+        <p>
+         Purpose: Follow-up Consultation
+        </p>
+        <p>
+         Status: In-person Consultation
+        </p>
+       </div>
+      </div>
+      <div class="space-x-2">
+       <button class="bg-purple-600 text-white px-4 py-2 rounded">
+        View Profile
+       </button>
+       <button class="bg-black text-white px-4 py-2 rounded">
+        Initiate Call
+       </button>
+      </div>
+     </div>
+     <div class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center mb-4 md:mb-0">
+       <img alt="Patient Image" class="h-36 w-32 mr-4" height="150" src="https://storage.googleapis.com/a1aa/image/sQFZ3YJcUB75Fx72kpPHeYG8lKigDnMHMcWTjyPVqBwZWBfTA.jpg" width="120"/>
+       <div class="text-xl md:text-2xl">
+        <p>
+         Name: Patient III
+        </p>
+        <p>
+         Time: 15:15 - 15:45
+        </p>
+        <p>
+         Purpose: Routine Check-up
+        </p>
+        <p>
+         Status: Online Consultation
+        </p>
+       </div>
+      </div>
+      <div class="space-x-2">
+       <button class="bg-purple-600 text-white px-4 py-2 rounded">
+        View Profile
+       </button>
+       <button class="bg-black text-white px-4 py-2 rounded">
+        Initiate Call
+       </button>
+      </div>
+     </div>
+     <div class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center mb-4 md:mb-0">
+       <img alt="Patient Image" class="h-36 w-32 mr-4" height="150" src="https://storage.googleapis.com/a1aa/image/sQFZ3YJcUB75Fx72kpPHeYG8lKigDnMHMcWTjyPVqBwZWBfTA.jpg" width="120"/>
+       <div class="text-xl md:text-2xl">
+        <p>
+         Name: Patient IV
+        </p>
+        <p>
+         Time: 16:00 - 16:30
+        </p>
+        <p>
+         Purpose: Diagnostic Consultation
+        </p>
+        <p>
+         Status: In-person Consultation
+        </p>
+       </div>
+      </div>
+      <div class="space-x-2">
+       <button class="bg-purple-600 text-white px-4 py-2 rounded">
+        View Profile
+       </button>
+       <button class="bg-black text-white px-4 py-2 rounded">
+        Initiate Call
+       </button>
+      </div>
+     </div>
+     <div class="bg-gray-100 p-4 rounded-lg flex flex-col md:flex-row items-center justify-between">
+      <div class="flex items-center mb-4 md:mb-0">
+       <img alt="Patient Image" class="h-36 w-32 mr-4" height="150" src="https://storage.googleapis.com/a1aa/image/sQFZ3YJcUB75Fx72kpPHeYG8lKigDnMHMcWTjyPVqBwZWBfTA.jpg" width="120"/>
+       <div class="text-xl md:text-2xl">
+        <p>
+         Name: Patient V
+        </p>
+        <p>
+         Time: 16:45 - 17:15
+        </p>
+        <p>
+         Purpose: Follow-up Consultation
+        </p>
+        <p>
+         Status: Online Consultation
+        </p>
+       </div>
+      </div>
+      <div class="space-x-2">
+       <button class="bg-purple-600 text-white px-4 py-2 rounded">
+        View Profile
+       </button>
+       <button class="bg-black text-white px-4 py-2 rounded">
+        Initiate Call
+       </button>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-black text-white p-8 text-center w-full">
+   <div class="flex flex-col md:flex-row justify-between items-start">
+    <div class="text-left mb-4 md:mb-0">
+     <div class="flex items-center mb-3">
+      <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+      <span class="text-xl font-bold">
+       HealSmart
+      </span>
+     </div>
+     <p>
+      Email: info@healsmart.com
+     </p>
+     <p>
+      Phone: +1 123 456 7890
+     </p>
+    </div>
+    <div class="text-right">
+     <p class="mb-3">
+      You can Follow us on:
+     </p>
+     <div class="flex justify-center mb-3">
+      <a class="mx-1" href="#">
+       <i class="fab fa-facebook">
+       </i>
+      </a>
+      <a class="mx-1" href="#">
+       <i class="fab fa-twitter">
+       </i>
+      </a>
+      <a class="mx-1" href="#">
+       <i class="fab fa-instagram">
+       </i>
+      </a>
+      <a class="mx-1" href="#">
+       <i class="fab fa-discord">
+       </i>
+      </a>
+     </div>
+     <p>
+      © 2024 HealSmart
+     </p>
+    </div>
+   </div>
+   <div class="mt-3 text-center">
+    <p class="inline-block">
+     Privacy Policy | Terms and Conditions
+    </p>
+   </div>
+  </footer>
+ </body>
+</html>

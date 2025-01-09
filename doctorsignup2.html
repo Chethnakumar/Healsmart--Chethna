@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HealSmart Payment Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #8989cb;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #000;
+        }
+        .header a {
+            color: #000;
+            text-decoration: none;
+            position: absolute;
+            left: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .payment-form {
+            background-color: #d3d3d3;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .payment-form h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #000;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .payment-form button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .payment-form button:hover {
+            background-color: #333;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer div {
+            margin-bottom: 10px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .social-media a {
+            color: #fff;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        @media (max-width: 768px) {
+            .payment-form {
+                width: 90%;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#"><i class="fas fa-arrow-left"></i></a>
+        <img alt="HealSmart Logo" height="40" src="./Images/logo.jpg" width="40"/>
+        <h1>HealSmart</h1>
+    </div>
+
+    <div class="container">
+        <!-- Payment Form -->
+        <div class="payment-form">
+            <h2>Payment Details</h2>
+            <div class="input-group">
+                <label for="account-number">Account Number</label>
+                <input type="text" id="account-number" name="account-number" placeholder="Enter your account number" required/>
+            </div>
+            <div class="input-group">
+                <label for="ifsc-code">IFSC Code</label>
+                <input type="text" id="ifsc-code" name="ifsc-code" placeholder="Enter IFSC code" required/>
+            </div>
+            <div class="input-group">
+                <label for="bank-name">Bank Name</label>
+                <select id="bank-name" name="bank-name" required>
+                    <option value="" disabled selected>Select your bank</option>
+                    <option value="sbi">State Bank of India</option>
+                    <option value="hdfc">HDFC Bank</option>
+                    <option value="icici">ICICI Bank</option>
+                    <option value="axis">Axis Bank</option>
+                    <option value="pnb">Punjab National Bank</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="branch">Branch</label>
+                <select id="branch" name="branch" required>
+                    <option value="" disabled selected>Select your branch</option>
+                    <option value="branch1">Branch 1</option>
+                    <option value="branch2">Branch 2</option>
+                    <option value="branch3">Branch 3</option>
+                </select>
+            </div>
+            <button id="submit-btn" type="button">Complete Process</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <img alt="HealSmart Logo" height="50" src="./Images/logo.jpg" width="50"/>
+            <h1>HealSmart</h1>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +91 96222 54876</p>
+        </div>
+        <div>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a></p>
+        </div>
+        <div class="social-media">
+            <p>Follow us:</p>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <div>&copy; 2024 HealSmart</div>
+    </footer>
+
+    <script>
+        // Add event listener to the submit button
+        document.getElementById('submit-btn').addEventListener('click', async () => {
+            const accountNumber = document.getElementById('account-number').value;
+            const ifscCode = document.getElementById('ifsc-code').value;
+            const bankName = document.getElementById('bank-name').value;
+            const branch = document.getElementById('branch').value;
+
+            // Validate the form fields
+            if (!accountNumber || !ifscCode || !bankName || !branch) {
+                alert("All fields are required!");
+                return;
+            }
+
+            // Prepare data for the POST request
+            const paymentData = {
+                accountNumber,
+                ifscCode,
+                bankName,
+                branch,
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/payments/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(paymentData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Redirect to the next page after successful submission
+                    window.location.href = 'doctorsignup3.html';  // Redirect to next page
+                } else {
+                    alert("Error: " + data.message);
+                }
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

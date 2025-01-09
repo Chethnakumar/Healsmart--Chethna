@@ -1,0 +1,225 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HealSmart
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8989cb;
+            padding: 10px 20px;
+        }
+        .header img {
+            height: 40px;
+        }
+        .header .brand {
+            display: flex;
+            align-items: center;
+        }
+        .header .brand span {
+            margin-left: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .header .user-name {
+            display: flex;
+            align-items: center;
+        }
+        .header .user-name i {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        .main-content {
+            text-align: center;
+            padding: 255px 21px;
+            background: url('./Images/Loginbackground.jpeg') no-repeat center center;
+            background-size: cover;
+            color: #000;
+        }
+        .main-content h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .main-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .main-content button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            border-top: 5px solid #000;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        .footer .contact-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .contact-info img {
+            height: 50px;
+            vertical-align: middle;
+        }
+        .footer .contact-info h1 {
+            display: inline;
+            margin-left: 10px;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+        .footer .contact-info p {
+            margin: 5px 0;
+        }
+        .footer .links {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .links p {
+            margin: 5px 0;
+        }
+        .footer .social-media {
+            flex: 1;
+            min-width: 200px;
+            text-align: right;
+        }
+        .footer .social-media p {
+            margin: 5px 0;
+        }
+        .footer .social-media a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        .footer .social-media a:hover {
+            color: #d1c4e9;
+        }
+        .footer .bottom-links {
+            width: 100%;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .footer .bottom-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer .bottom-links a:hover {
+            text-decoration: underline;
+        }
+        .footer .copyright {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 20px;
+            }
+            .main-content h1 {
+                font-size: 1.5em;
+            }
+            .main-content p {
+                font-size: 1em;
+            }
+            .main-content button {
+                font-size: 0.9em;
+            }
+            .footer .social-media {
+                text-align: left;
+            }
+            .footer .bottom-links {
+                text-align: center;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <div class="header">
+   <div class="brand">
+    <img alt="HealSmart logo" height="40" src="./Images/logo.jpg" width="40"/>
+    <span>HealSmart</span>
+   </div>
+   <div class="user-name">
+    <span>
+     User name
+    </span>
+    <i class="fas fa-user-circle">
+    </i>
+   </div>
+  </div>
+  <div class="main-content">
+   <h1>
+    YOUR VERIFICATIONS ARE ONGOING!
+   </h1>
+   <p>
+    Once the verifications are done, you will be notified through your email.
+    <br/>
+    Until then Try exploring our website to know how it works..!
+   </p>
+   <button>
+    Continue
+   </button>
+  </div>
+  <footer class="footer">
+   <div class="contact-info">
+    <img alt="HealSmart logo" src="./Images/logo.jpg"/>
+    <h1>HealSmart</h1>
+    <p>
+     Email: info@healsmart.com
+    </p>
+    <p>
+     Phone: +91 98232 54376
+    </p>
+   </div>
+   <div class="links">
+    <p>Shop All</p>
+    <p>Recovery Journal</p>
+    <p>Recovery Toolkit</p>
+    <p>Get Well Cards</p>
+    <p>Bundles</p>
+   </div>
+   <div class="links">
+    <p>Our Mission</p>
+    <p>Why HealSmart</p>
+    <p>Insights</p>
+    <p>FAQs</p>
+    <p>Shipping and Returns</p>
+   </div>
+   <div class="social-media">
+    <p>You can follow us on:</p>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-snapchat"></i></a>
+   </div>
+   <div class="bottom-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms and Conditions</a>
+   </div>
+   <div class="copyright">
+    <p>© 2024 Healsmart</p>
+   </div>
+  </footer>
+ </body>
+</html>

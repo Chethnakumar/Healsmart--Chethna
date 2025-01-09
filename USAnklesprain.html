@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventing Ankle Sprains - HealSmart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+        .header .left img {
+            height: 50px;
+        }
+        .header .left h1 {
+            margin-left: 15px;
+            font-size: 28px;
+            color: black;
+        }
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 200px;
+            padding: 10px 0;
+        }
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .profile.active .dropdown {
+            display: block;
+        }
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            width: 100%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .title-section h2 {
+            font-size: 30px;
+            color: #4e4e4e;
+            margin-bottom: 10px;
+        }
+        .title-section p {
+            font-size: 18px;
+            color: #777;
+        }
+        .section-title {
+            font-size: 24px;
+            margin-top: 30px;
+            color: #4e4e4e;
+        }
+        .section-content {
+            margin-top: 10px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .list-item {
+            margin-bottom: 8px;
+        }
+        .video-link {
+            text-decoration: none;
+            color: #2e64fe;
+            font-weight: bold;
+        }
+        .video-link:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            width: 100%;
+        }
+        .book-consultation {
+            background-color: #4e73df;
+            color: white;
+            font-size: 16px;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .book-consultation:hover {
+            background-color: #3e5bb5;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+        .image-container {
+            width: 50%;
+            padding-left: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .video-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .video-container iframe {
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+        }
+        .gear-links a {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #4e73df;
+        }
+        .gear-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="left">
+        <img alt="HealSmart Logo" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+        <h1>HealSmart</h1>
+    </div>
+    <div class="profile" onclick="toggleDropdown()">
+        <i class="fas fa-user-circle profile-icon"></i>
+        <div class="dropdown">
+            <a href="#">Home</a>
+            <a href="#">Profile</a>
+            <a href="#">Prevention</a>
+            <a href="#">Recovery</a>
+            <a href="#">My Bookings</a>
+            <a href="#">Logout</a>
+        </div>
+    </div>
+</header>
+
+<div class="content">
+    <!-- Title and Subtitle -->
+    <div class="title-section">
+        <h2>Preventing Ankle Sprains: Expert Tips & Tools</h2>
+        <p>Learn how to strengthen and protect your ankles with effective strategies tailored to your needs.</p>
+    </div>
+
+    <!-- Common Causes and Risk Factors -->
+    <div class="section" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="text-container" style="width: 45%;">
+            <h3 class="section-title">Common Causes & Risk Factors</h3>
+            <div class="section-content">
+                <ul>
+                    <li class="list-item">Engaging in high-impact sports (e.g., basketball, soccer).</li>
+                    <li class="list-item">Previous ankle injuries.</li>
+                    <li class="list-item">Weak or unbalanced muscles.</li>
+                    <li class="list-item">Improper footwear.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x400.png?text=Common+Causes+of+Ankle+Sprains" alt="Common Causes of Ankle Sprains">
+        </div>
+    </div>
+
+    <!-- Symptoms -->
+    <div class="section" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="text-container" style="width: 45%;">
+            <h3 class="section-title">Symptoms</h3>
+            <div class="section-content">
+                <ul>
+                    <li class="list-item">Pain or tenderness around the ankle.</li>
+                    <li class="list-item">Swelling and bruising.</li>
+                    <li class="list-item">Limited range of motion.</li>
+                    <li class="list-item">Inability to bear weight on the affected foot.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="https://via.placeholder.com/600x400.png?text=Symptoms+of+Ankle+Sprains" alt="Symptoms of Ankle Sprains">
+        </div>
+    </div>
+
+    <!-- Preventive Measures (Videos) -->
+    <div class="section">
+        <h3 class="section-title">Preventive Measures</h3>
+        <div class="section-content">
+            <p>Watch these helpful videos to strengthen and stretch your ankles:</p>
+        </div>
+        <!-- Video Embeds -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/xxx" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/yyy" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/zzz" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- First Aid Knowledge -->
+    <div class="section">
+        <h3 class="section-title">First Aid for Ankle Sprains</h3>
+        <div class="section-content">
+            <p>In case of an ankle sprain, follow these steps immediately:</p>
+            <ul>
+                <li class="list-item">Rest and elevate the ankle.</li>
+                <li class="list-item">Apply ice to reduce swelling.</li>
+                <li class="list-item">Wrap the ankle with a compression bandage.</li>
+                <li class="list-item">Seek medical attention if necessary.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Recommended Gear -->
+    <div class="section">
+        <h3 class="section-title">Recommended Gear</h3>
+        <div class="section-content">
+            <p>Click on the links below to purchase ankle supports and protective gear:</p>
+            <div class="gear-links">
+                <a href="https://www.amazon.com" target="_blank">Ankle Brace Support</a>
+                <a href="https://www.amazon.com" target="_blank">Compression Sleeves</a>
+                <a href="https://www.amazon.com" target="_blank">Proper Footwear for Sports</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Consultation Button -->
+    <div class="button-container">
+        <h3>For Personalized Care</h3>
+        <a href="book-consultation.html" class="book-consultation">Book Consultation</a>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2024 HealSmart</p>
+</footer>
+
+<script>
+    function toggleDropdown() {
+        const profile = document.querySelector('.profile');
+        profile.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>

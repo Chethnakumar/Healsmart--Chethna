@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Doctor Profile - HealSmart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #8989cb;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #000;
+        }
+        .header a {
+            color: #000;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-picture-container {
+            position: relative;
+            display: inline-block;
+        }
+        .profile-picture-container img {
+            display: block;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            border: 3px solid #8989cb;
+        }
+        .profile-picture-container .edit-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: #8989cb;
+            color: white;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .profile-picture-container .edit-icon:hover {
+            background-color: #6666b2;
+        }
+        .profile-header .info {
+            margin-left: 20px;
+            flex-grow: 1;
+        }
+        .profile-header .info input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .section input, .section textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .section textarea {
+            resize: none;
+            height: 100px;
+        }
+        .save-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .save-button button {
+            background-color: #8989cb;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .save-button button:hover {
+            background-color: #6666b2;
+        }
+        .success-message {
+            text-align: center;
+            color: green;
+            font-size: 16px;
+            margin-top: 10px;
+            display: none;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .footer div {
+            margin-bottom: 10px;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .social-media a {
+            color: #fff;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .profile-header .info {
+                margin: 10px 0 0;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="#"><i class="fas fa-arrow-left"></i></a>
+        <h1>Doctor Profile - HealSmart</h1>
+        <a href="#">Logout</a>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-picture-container">
+                <img src="https://via.placeholder.com/100" alt="Doctor Profile Picture" id="profile-picture">
+                <label for="profile-picture-input" class="edit-icon">
+                    <i class="fas fa-edit"></i>
+                </label>
+                <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
+            </div>
+            <div class="info">
+                <input type="text" value="Dr. John Doe" placeholder="Full Name">
+                <input type="text" value="Orthopedic Surgeon" placeholder="Specialization">
+                <input type="email" value="johndoe@example.com" placeholder="Email Address">
+                <input type="tel" value="+1 123 456 7890" placeholder="Contact Number">
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section">
+            <h3>About</h3>
+            <textarea placeholder="Write a brief bio about yourself...">Experienced orthopedic surgeon specializing in joint replacement and sports injuries.</textarea>
+        </div>
+
+        <!-- Qualifications Section -->
+        <div class="section">
+            <h3>Qualifications</h3>
+            <input type="text" value="MBBS, MD (Orthopedics)" placeholder="Enter your qualifications">
+        </div>
+
+        <!-- Save Changes Button -->
+        <div class="save-button">
+            <button onclick="saveChanges()">Save Changes</button>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="success-message">Changes saved successfully!</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div>
+            <img alt="HealSmart Logo" height="50" src="./Images/logo.jpg" width="50">
+            <h1>HealSmart</h1>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +91 96222 54876</p>
+        </div>
+        <div>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a></p>
+        </div>
+        <div class="social-media">
+            <p>Follow us:</p>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <div>&copy; 2024 HealSmart</div>
+    </footer>
+
+    <script>
+        const profilePictureInput = document.getElementById('profile-picture-input');
+        const profilePicture = document.getElementById('profile-picture');
+
+        profilePictureInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePicture.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function saveChanges() {
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<html>
+<head>
+    <title>HealSmart Registration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #8989cb;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #000;
+        }
+        .container {
+            background-image: url('./Images/Loginbackground.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+        .login-box {
+            background-color: #d9d9dd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .login-box label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .login-box input, .login-box select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #4db6ac;
+            color: #fff;
+            font-size: 16px;
+        }
+        .login-box input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info,
+            .social-contact,
+            .contact-us {
+                flex: none;
+                width: 100%;
+            }
+
+            .social-contact {
+                margin-top: 20px;
+            }
+
+            .contact-us {
+                margin-top: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img alt="HealSmart Logo" src="./Images/logo.jpg"/>
+        <h1>HealSmart</h1>
+    </div>
+    <div class="container">
+        <div class="login-box">
+            <form id="registration-form">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required/>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required/>
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="text" required/>
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option>--Select Gender--</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+                <label for="specialty">Specialty</label>
+                <input id="specialty" name="specialty" type="text" required/>
+                <label for="password">Create password</label>
+                <input id="password" name="password" type="password" required/>
+                <input type="submit" value="Next"/>
+            </form>
+        </div>
+    </div>
+     <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +1 123 456 7890</p>
+        </div>
+
+        <div class="contact-us">
+            <a href="USContactUs.html">Contact Us</a>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
+        </div>
+
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
+    </footer>    
+    <script>
+        // Listen for form submission
+        document.getElementById('registration-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the form from reloading the page
+
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                gender: formData.get('gender'),
+                specialty: formData.get('specialty'),
+                password: formData.get('password')
+            };
+
+            try {
+                // Send a POST request to the backend
+                const response = await fetch('http://localhost:3000/api/docregistration/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Doctor registered successfully!');
+                    // You can redirect the user or clear the form
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                alert('An error occurred during registration.');
+            }
+        });
+    </script>
+</body>
+</html>

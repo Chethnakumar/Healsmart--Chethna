@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Availability Schedule</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://placehold.co/800x600') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #bfa2db;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .header .left {
+      display: flex;
+      align-items: center;
+    }
+    .header .left img {
+      height: 40px;
+    }
+    .header .left h1 {
+      margin: 0 0 0 10px;
+      font-size: 24px;
+      color: black;
+    }
+    .header .profile {
+      position: relative;
+      display: inline-block;
+    }
+    .header .profile .profile-icon {
+      font-size: 40px;
+      color: black;
+      cursor: pointer;
+    }
+    .header .profile .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 20px;
+      width: 150px;
+    }
+    .header .profile .dropdown a {
+      color: black;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+      border-radius: 20px;
+    }
+    .header .profile .dropdown a:hover {
+      background-color: #ddd;
+    }
+    .header .profile.active .dropdown {
+      display: block;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .title {
+      text-align: center;
+      font-size: 48px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+    .table-container {
+      height: 1020px;
+      overflow-y: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 24px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 20px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .action-buttons i {
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    .add-availability {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .add-availability button {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .add-availability button i {
+      margin-right: 10px;
+    }
+  </style>
+  <script>
+    function toggleDropdown() {
+      const profile = document.querySelector('.profile');
+      profile.classList.toggle('active');
+    }
+
+    function deleteRow(button) {
+      const row = button.closest('tr');
+      const date = row.cells[0].innerText;
+      const timeSlot = row.cells[1].innerText;
+
+      console.log('Deleting availability:', { date, timeSlot });
+
+      fetch('/api/deleteAvailability', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ date, timeSlot })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response from server:', data);
+        if (data.success) {
+          row.remove();
+        } else {
+          alert('Failed to delete the availability.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to delete the availability.');
+      });
+    }
+
+    function addAvailability() {
+      const tableBody = document.querySelector('table tbody');
+      const newRow = document.createElement('tr');
+
+      newRow.innerHTML = `
+        <td>25-12-2024</td>
+        <td>10:00AM - 10:30AM</td>
+        <td>Online</td>
+        <td>Available</td>
+        <td class="action-buttons">
+          <i class="fas fa-minus-circle" onclick="deleteRow(this)"></i>
+        </td>
+      `;
+
+      tableBody.appendChild(newRow);
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="left">
+      <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+      <h1>HealSmart</h1>
+    </div>
+    <div class="profile" onclick="toggleDropdown()">
+      <i class="fas fa-user-circle profile-icon"></i>
+      <div class="dropdown">
+        <a href="#">Home</a>
+        <a href="#">Profile</a>
+        <a href="#">Appointments</a>
+        <a href="#">Availability</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </header>
+  <div class="title">Availability Schedule</div>
+  <div class="container">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Mode</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Existing rows go here -->
+          <tr>
+            <td>23-12-2024</td>
+            <td>9:00AM - 9:30AM</td>
+            <td>Online</td>
+            <td>Booked</td>
+            <td>Cancel</td>
+          </tr>
+          <tr>
+            <td>23-12-2024</td>
+            <td>9:30AM - 10:00AM</td>
+            <td>Online</td>
+            <td>Available</td>
+            <td class="action-buttons">
+              <i class="fas fa-minus-circle" onclick="deleteRow(this)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="add-availability">
+        <a href="DHAddAvailability.html">
+            <button onclick="addAvailability()">
+        <i class="fas fa-plus"></i>
+        Add Availability
+      </button>
+        </a>
+    </div>
+  </div>
+</body>
+</html>

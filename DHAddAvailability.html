@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Availability</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Reset body and HTML margins to ensure no gaps */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #bfa2db;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+        .header .left img {
+            height: 40px;
+        }
+        .header .left h1 {
+            margin: 0 0 0 10px;
+            font-size: 24px;
+            color: black;
+        }
+        .header .profile {
+            position: relative;
+            display: inline-block;
+        }
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+            cursor: pointer;
+        }
+        .header .profile .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 20px;
+            width: 150px;
+        }
+        .header .profile .dropdown a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+            border-radius: 20px;
+        }
+        .header .profile .dropdown a:hover {
+            background-color: #ddd;
+        }
+        .header .profile.active .dropdown {
+            display: block;
+        }
+
+        /* Main content styles */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 60px); /* Adjust for header height */
+            padding: 20px;
+            box-sizing: border-box;
+            background-image: url('./Images/improved_resized_image_new.jpeg'); /* Replace with your image URL */
+            background-size: cover; /* Ensures the image covers the whole container */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents tiling */
+        }
+        .form-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4b0082;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #6a5acd;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #5b4cb0;
+        }
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="left">
+            <img alt="HealSmart Logo" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" />
+            <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="#">Home</a>
+                <a href="#">Profile</a>
+                <a href="#">Appointments</a>
+                <a href="#">Availability</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="form-box">
+            <h2>Add Availability</h2>
+            <form id="availability-form">
+                <div class="form-group">
+                    <label for="from-date">From Date</label>
+                    <input type="date" id="from-date" name="from-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="till-date">Till Date</label>
+                    <input type="date" id="till-date" name="till-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time-from">Time From</label>
+                    <input type="time" id="time-from" name="time-from" required>
+                </div>
+                <div class="form-group">
+                    <label for="time-till">Time Till</label>
+                    <input type="time" id="time-till" name="time-till" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Select Service</label>
+                    <select id="service" name="service" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="online">Online Consultation</option>
+                        <option value="offline">Offline Consultation</option>
+                    </select>
+                </div>
+                <button type="submit">Confirm</button>
+                <p class="success-message" id="success-message">Availability added successfully!</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const profile = document.querySelector('.profile');
+            profile.classList.toggle('active');
+        }
+
+        // Handle form submission
+        const form = document.getElementById('availability-form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission (page reload)
+
+            // Gather form data
+            const formData = {
+                fromDate: form['from-date'].value,
+                tillDate: form['till-date'].value,
+                timeFrom: form['time-from'].value,
+                timeTill: form['time-till'].value,
+                service: form['service'].value
+            };
+
+            // Send form data to the backend
+            fetch('http://localhost:3000/api/availability/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)  // Convert form data to JSON
+            })
+            .then(response => response.json())  // Parse the JSON response
+            .then(data => {
+                // Display success message if availability is added
+                const successMessage = document.getElementById('success-message');
+                successMessage.style.display = 'block'; // Show success message
+                setTimeout(() => successMessage.style.display = 'none', 3000); // Hide after 3 seconds
+
+                // Optionally log the response data to the console (for debugging)
+                console.log('Server Response:', data);
+
+                form.reset(); // Reset the form after submission
+            })
+            .catch(error => {
+                // Log errors if the request fails
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | HealSmart</title>
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px; /* Width of the dropdown */
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap; /* Prevent text from wrapping */
+            border-bottom: 1px solid #f1f1f1; /* Adds separation between links */
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none; /* Remove border from last item */
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2rem;
+            background-color: #ecf0f1;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+
+        .contact-form, .contact-info {
+            width: 45%;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #34495e;
+        }
+
+        .contact-info h3 {
+            margin-top: 1rem;
+        }
+
+        #map {
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-form, .contact-info {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="left">
+            <img alt="HealSmart Logo" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+            <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="#">Home</a>
+                <a href="#">Profile</a>
+                <a href="#">Prevention</a>
+                <a href="#">Recovery</a>
+                <a href="#">My Bookings</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Get in Touch with Us</h2>
+        <p>If you have any questions, feel free to reach out!</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="contact-form">
+            <h3>Contact Form</h3>
+            <form id="contact-form" onsubmit="return validateForm()">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Your full name">
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Your email address">
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="Subject of your message">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+            <div id="form-message"></div>
+        </div>
+
+        <div class="contact-info">
+            <h3>Our Location</h3>
+            <div id="map">
+                <!-- Google Map Embed -->
+                <iframe src="https://www.google.com/maps/embed?pb=YOUR_MAP_URL" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <p>123 HealSmart Avenue, Wellness City, Healthland</p>
+
+            <h3>Support Contact Details</h3>
+            <p>Email: <a href="mailto:support@healsmart.com">support@healsmart.com</a></p>
+            <p>Phone: +1 123 456 7890</p>
+            <p>Operating Hours: Mon-Fri, 9:00 AM - 6:00 PM</p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+    
+            // Check if all fields are filled
+            if (name && email && subject && message) {
+                // Send the form data to the backend
+                fetch('http://localhost:3000/api/contactus/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, subject, message }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        document.getElementById("form-message").innerHTML = "<p>" + data.message + "</p>";
+                    } else {
+                        document.getElementById("form-message").innerHTML = "<p style='color: red;'>Something went wrong. Please try again.</p>";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("form-message").innerHTML = "<p style='color: red;'>There was an error. Please try again later.</p>";
+                });
+                return false; // Prevent the form from refreshing the page
+            } else {
+                document.getElementById("form-message").innerHTML = "<p style='color: red;'>Please fill in all required fields.</p>";
+                return false;
+            }
+        }
+    </script>
+    
+</body>
+</html>

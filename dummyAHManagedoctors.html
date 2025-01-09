@@ -1,0 +1,477 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Manage Doctors</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* margin-bottom: 10px; */
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px;
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+    .main-content {
+      text-align: center;
+      padding: 20px;
+      flex: 1;
+    }
+    .main-content h1 {
+      color: #333;
+    }
+    .manage-doctors {
+      background-color: #d3d3d3;
+      border-radius: 10px;
+      padding: 20px;
+      display: inline-block;
+      text-align: left;
+      width: 60%;
+    }
+    .manage-doctors h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0;
+      padding-bottom: 10px;
+    }
+    .inner-box {
+      background-color: #b0b0b0;
+      border-radius: 10px;
+      padding: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .doctor-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .doctor-card {
+      background-color: #6a5acd;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      color: white;
+      width: calc(50% - 10px);
+      box-sizing: border-box;
+      min-height: 150px;
+    }
+    .doctor-card img {
+      width: 90px;
+      height: 120px;
+      background-color: #ccc;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+    .doctor-info {
+      flex-grow: 1;
+    }
+    .doctor-info p {
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .doctor-info .view-button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 2px 5px;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .doctor-info .view-button:hover {
+      background-color: #555;
+    }
+    .doctor-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: auto;
+      transform: translateX(-50px);
+    }
+    .doctor-actions button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 2px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+      margin: 0 20px;
+    }
+    .doctor-actions button:hover {
+      background-color: #555;
+    }
+    .footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px;
+      text-align: left;
+      border-top: 5px solid #000;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+    .footer .contact-info {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer .contact-info img {
+      height: 50px;
+      vertical-align: middle;
+    }
+    .footer .contact-info h1 {
+      display: inline;
+      margin-left: 10px;
+      vertical-align: middle;
+      font-size: 24px;
+    }
+    .footer .contact-info p {
+      margin: 5px 0;
+    }
+    .footer .links {
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer .links p {
+      margin: 5px 0;
+    }
+    .footer .bottom-links {
+      width: 100%;
+      text-align: right;
+      margin-top: 20px;
+    }
+    .footer .bottom-links a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .footer .bottom-links a:hover {
+      text-decoration: underline;
+    }
+    .footer .copyright {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+    }
+    .footer .links-container {
+      display: flex;
+      flex: 2;
+      justify-content: space-between;
+    }
+    .footer .policies {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .footer .contact-details {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      text-align: right;
+    }
+    @media (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer .policies, .footer .contact-info, .footer .copyright, .footer .contact-details {
+        text-align: left;
+        margin-top: 10px;
+        position: static;
+        transform: none;
+      }
+    }
+  </style>
+  <script>
+    function toggleDropdown() {
+      var dropdownMenu = document.getElementById('dropdown-menu');
+      if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+        dropdownMenu.style.display = "block";
+      } else {
+        dropdownMenu.style.display = "none";
+      }
+    }
+
+    document.addEventListener('click', function(event) {
+      var isClickInside = document.querySelector('.profile').contains(event.target);
+      if (!isClickInside) {
+        document.getElementById('dropdown-menu').style.display = 'none';
+      }
+    });
+  </script>
+</head>
+<body>
+  <img alt="Background image showing a medical theme" class="background-image" src="https://storage.googleapis.com/a1aa/image/IW7QX1I5mf2HIS2eSXC0dN74ebHtZrvJYztUZVeef8PufyueTA.jpg"/>
+  <header class="header">
+    <div class="left">
+     <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="40"/>
+     <h1>
+      HealSmart
+     </h1>
+    </div>
+    <nav>
+     <div class="profile">
+      <i class="fas fa-user-circle profile-icon" onclick="toggleDropdown()">
+      </i>
+      <div class="dropdown" id="dropdown-menu">
+         <a href="#">
+             Home
+            </a>
+            <a href="#">
+             Manage Booking
+            </a>
+            <a href="#">
+             Manage Doctors
+            </a>
+       </a>
+       <a href="#">
+        Log Out
+       </a>
+      </div>
+     </div>
+    </nav>
+   </header>
+  <main class="main-content">
+    <h1>Manage Doctors!</h1>
+    <div class="manage-doctors">
+      <h2>
+        <span>Manage Doctors</span>
+        <button>Doctor Details</button>
+      </h2>
+      <div class="inner-box">
+        <div class="doctor-cards">
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 1</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>123456</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 2</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>654321</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 3</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>789012</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 4</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>210987</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 5</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>345678</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 6</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>987654</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 7</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>456789</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 8</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>654789</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+          <div class="doctor-card">
+            <img alt="Doctor's profile picture" height="120" src="https://storage.googleapis.com/a1aa/image/JqpaTYtgfLWJPCVtXcpouEJEMDccfcEwxPpsfOKyYNixBw6nA.jpg" width="90"/>
+            <div class="doctor-info">
+              <p>Name: Doc 9</p>
+              <p>Degree Certificate: <a class="view-button" href="#">View</a></p>
+              <p>Govt ID proof: <a class="view-button" href="#">View</a></p>
+              <p>Medical License Number: <span>321654</span></p>
+            </div>
+            <div class="doctor-actions">
+              <button>Approve</button>
+              <button>Reject</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="contact-info">
+      <img alt="HealSmart Logo" height="50" src="https://storage.googleapis.com/a1aa/image/BQ0t0NFe3DxKOqVZLTDeN3AdH1Qibl5eSIeykfnq0C1zTePfJA.jpg" width="50"/>
+      <h1>HealSmart</h1>
+    </div>
+    <div class="links">
+      <p></p>
+    </div>
+    <div class="bottom-links">
+      <p></p>
+    </div>
+    <div class="contact-details" style="bottom: 30px;">
+      <p>Email: info@healsmart.com</p>
+      <p>Phone: +91 96222 84676</p>
+    </div>
+    <div class="policies">
+      <p>
+        <a href="#" style="color: #fff; text-decoration: none;">Privacy Policy</a> |
+        <a href="#" style="color: #fff; text-decoration: none;">Terms and Conditions</a>
+      </p>
+    </div>
+    <div class="copyright">
+      <p>© 2023 HealSmart</p>
+    </div>
+  </footer>
+</body>
+</html>
