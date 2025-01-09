@@ -12,13 +12,60 @@
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #bfa2db;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .header {
+      background-color: #bfa2db;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .header .left {
+      display: flex;
+      align-items: center;
+    }
+    .header .left img {
+      height: 40px;
+    }
+    .header .left h1 {
+      margin-left: 10px;
+      font-size: 24px;
+      color: black;
+    }
+    .header .profile {
+      position: relative;
+      display: inline-block;
+    }
+    .header .profile .profile-icon {
+      font-size: 40px;
+      color: black;
+      cursor: pointer;
+    }
+    .header .profile .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+      width: 150px;
+    }
+    .header .profile .dropdown a {
+      color: black;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+      border-radius: 10px;
+    }
+    .header .profile .dropdown a:hover {
+      background-color: #ddd;
+    }
+    .header .profile.active .dropdown {
+      display: block;
+    }
         .profile-container {
             max-width: 1200px;
             margin: 40px auto;
@@ -85,15 +132,31 @@
             }
         }
     </style>
+    <script>
+        function toggleDropdown() {
+          const profileDropdown = document.querySelector('.profile');
+          profileDropdown.classList.toggle('active');
+        }
+      </script>
 </head>
 <body>
 
-<header>
-    <div class="left">
-        <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
-        <h1>HealSmart</h1>
-    </div>
-</header>
+    <header class="header">
+        <div class="left">
+          <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+          <h1>HealSmart</h1>
+        </div>
+        <div class="profile" onclick="toggleDropdown()">
+          <i class="fas fa-user-circle profile-icon"></i>
+          <div class="dropdown">
+            <a href="DH.html">Home</a>
+            <a href="DoctorProfile.html">Profile</a>
+            <a href="DHManageAppointment.html">Appointments</a>
+            <a href="DHAddAvailability.html">Availability</a>
+            <a href="#" onclick="confirmLogout()">Logout</a>
+          </div>
+        </div>
+      </header>
 
 <div class="profile-container">
     <div class="profile-header">
