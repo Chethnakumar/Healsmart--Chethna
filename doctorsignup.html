@@ -203,41 +203,43 @@
     <script>
         // Listen for form submission
         document.getElementById('registration-form').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent the form from reloading the page
+    e.preventDefault(); // Prevent the form from reloading the page
 
-            const formData = new FormData(e.target);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                gender: formData.get('gender'),
-                specialty: formData.get('specialty'),
-                password: formData.get('password')
-            };
+    const formData = new FormData(e.target);
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        gender: formData.get('gender'),
+        specialty: formData.get('specialty'),
+        password: formData.get('password')
+    };
 
-            try {
-                // Send a POST request to the backend
-                const response = await fetch('http://localhost:3000/api/docregistration/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    alert('Doctor registered successfully!');
-                    // You can redirect the user or clear the form
-                } else {
-                    alert(`Error: ${result.message}`);
-                }
-            } catch (error) {
-                console.error('Error during registration:', error);
-                alert('An error occurred during registration.');
-            }
+    try {
+        // Send a POST request to the backend
+        const response = await fetch('http://localhost:3000/api/docregistration/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Doctor registered successfully!');
+            // Redirect to the next page
+            window.location.href = 'doctorsignup1.html'; // Replace with your actual page URL
+        } else {
+            alert(`Error: ${result.message}`);
+        }
+    } catch (error) {
+        console.error('Error during registration:', error);
+        alert('An error occurred during registration.');
+    }
+});
+
     </script>
 </body>
 </html>
