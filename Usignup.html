@@ -161,33 +161,32 @@
 
   <div class="container">
     <div class="form-container">
-      <form id="signupForm" onsubmit="validateForm(event)">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required/>
+      <h1>User Signup</h1>
+    <form onsubmit="handleSignup(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required/>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
 
-        <label for="phone">Phone Number</label>
-        <input id="phone" name="phone" type="text" required/>
+        <label for="phonenumber">Phone Number:</label>
+        <input type="text" id="phonenumber" name="phonenumber" required><br><br>
 
-        <label for="age">Age</label>
-        <input id="age" name="age" type="number" required/>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
 
-        <label for="gender">Gender</label>
+        <label for="gender">Gender:</label>
         <select id="gender" name="gender" required>
-          <option value="">--Select Gender--</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
 
-        <label for="password">Create Password</label>
-        <input id="password" name="password" type="password" required/>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
 
-        <!-- Submit button without <a> tag -->
-        <a href="USHomePage.html"><button type="submit">Sign up</button></a>
-      </form>
+        <button type="submit">Signup</button>
+    </form>
       <a href="doctorsignup.html">Sign up as doctor</a>
     </div>
   </div>
@@ -225,81 +224,51 @@
             <p>© 2024 HealSmart</p>
         </div>
     </footer>
-    <script>
-        function toggleDropdown() {
-            const profile = document.querySelector('.profile');
-            profile.classList.toggle('active');
+<script>
+      
+      async function handleSignup(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phonenumber = document.getElementById("phonenumber").value;
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            const createpassword = document.getElementById("password").value;
+
+            const userData = {
+                name,
+                email,
+                phonenumber,
+                age,
+                gender,
+                createpassword,
+            };
+
+            try {
+                const response = await fetch("http://localhost:3000/api/usersignup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert("Signup successful!");
+                    // Redirect to another page
+                    window.location.href = "USHomePage.html"; // Update with your next page URL
+                } else {
+                    const error = await response.json();
+                    alert("Signup failed: " + (error.message || "Unknown error"));
+                }
+            } catch (err) {
+                alert("An error occurred: " + err.message);
+            }
         }
+
 </script>
  
-
-  <script>
-    
-    function validateForm() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const age = document.getElementById('age').value;
-      const gender = document.getElementById('gender').value;
-      const password = document.getElementById('password').value;
-
-      if (name === "" || email === "" || phone === "" || age === "" || gender === "" || password === "") {
-        alert("Please fill in all fields.");
-        return false; // Don't submit the form if fields are empty
-      }
-
-      // If form is valid, redirect to the home page
-      window.location.href = "USHomePage.html"; // Redirect to the home page
-      return false; // Prevent the form from submitting
-    }
-
-    async function validateForm(event) {
-    event.preventDefault(); // Prevent form from submitting normally
-    
-    // Gather form data
-    const formData = new FormData(document.getElementById('signupForm'));
-    
-    // Prepare data object for submission
-    const userData = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phonenumber: formData.get('phone'),
-      age: formData.get('age'),
-      gender: formData.get('gender'),
-      createpassword: formData.get('password')
-    };
-    
-    // Send data to the backend API
-    try {
-      const response = await fetch('http://localhost:3000/api/usersignup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert('Signup successful!');
-        window.location.href = "USHomePage.html"; // Redirect to the home page
-      } else {
-        alert('Error: ' + data.message); // Display error message
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('There was an issue with the signup. Please try again later.');
-    }
-  }
-
-  function confirmLogout() {
-        const confirmed = confirm("Are you sure you want to log out?");
-        if (confirmed) {
-            window.location.href = "Home.html"; // Redirect to the logout page
-        }
-    }
-
-  </script>
 </body>
 </html>
