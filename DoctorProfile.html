@@ -224,7 +224,7 @@
             <a href="DHManageAppointment.html">Appointments</a>
             <a href="DHAddAvailability.html">Availability</a>
             <a href="#" onclick="confirmLogout()">Logout</a>
-          </div>
+           </div>
         </div>
       </header>
 
@@ -311,6 +311,15 @@
                 successMessage.style.display = 'none';
             }, 3000);
         }
+
+      
+function confirmLogout() {
+        const confirmed = confirm("Are you sure you want to log out?");
+        if (confirmed) {
+            window.location.href = "Home.html"; // Redirect to the logout page
+        }
+    }
+
     </script>
 </body>
 </html>
