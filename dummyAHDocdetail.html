@@ -1,0 +1,408 @@
+<html>
+<head>
+    <title>HealSmart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #2b2b2b;
+            color: #fff;
+        }
+        .header {
+            background-color: #bfa2db;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            /* margin-bottom: 10px; */
+        }
+
+        .header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .left img {
+            height: 50px;
+        }
+
+        .header .left h1 {
+            margin: 0 0 0 15px;
+            font-size: 28px;
+            color: black;
+        }
+
+        .header .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .header .profile .profile-icon {
+            font-size: 40px;
+            color: black;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1;
+            width: 250px;
+            padding: 10px 0;
+        }
+
+        .dropdown a {
+            padding: 12px 20px;
+            display: block;
+            color: #333;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile.active .dropdown {
+            display: block;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 160px);
+            background: url('https://placehold.co/800x600') no-repeat center center;
+            background-size: cover;
+        }
+        .booking-card {
+            background-color: #dfe6e9;
+            border-radius: 10px;
+            padding: 20px;
+            width: 1200px;
+            height: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .booking-card h2 {
+            margin-top: 0;
+            color: #2d3436;
+            font-size: 32px;
+            display: inline-block;
+        }
+        .booking-card .details {
+            background-color: #6c5ce7;
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            height: calc(100% - 100px);
+        }
+        .booking-card .details .half {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .booking-card .details .divider {
+            width: 2px;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 20px;
+        }
+        .booking-card .details img {
+            width: 120px;
+            height: 120px;
+            background-color: #00aaff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .booking-card .details .info {
+            flex: 1;
+            margin-left: 20px;
+            font-size: 24px;
+        }
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: left;
+            border-top: 5px solid #000;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        .footer .contact-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .contact-info img {
+            height: 50px;
+            vertical-align: middle;
+        }
+        .footer .contact-info h1 {
+            display: inline;
+            margin-left: 10px;
+            vertical-align: middle;
+            font-size: 24px;
+        }
+        .footer .contact-info p {
+            margin: 5px 0;
+        }
+        .footer .links {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer .links p {
+            margin: 5px 0;
+        }
+        .footer .bottom-links {
+            width: 100%;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .footer .bottom-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer .bottom-links a:hover {
+            text-decoration: underline;
+        }
+        .footer .copyright {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+        .footer .links-container {
+            display: flex;
+            flex: 2;
+            justify-content: space-between;
+        }
+        .footer .policies {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .footer .contact-details {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: right;
+        }
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer .policies, .footer .contact-info, .footer .copyright, .footer .contact-details {
+                text-align: left;
+                margin-top: 10px;
+                position: static;
+                transform: none;
+            }
+        }
+        .back-button {
+            margin: 20px;
+            background-color: #bfa2db;
+            border: none;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 80px; /* Adjusted to place below the header */
+            left: 20px;
+        }
+        .nav-button {
+            background-color: #bfa2db;
+            border: none;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-button.prev {
+            top: 10px;
+            right: 90px; /* Moved 30px to the left */
+        }
+        .nav-button.next {
+            top: 10px;
+            right: 40px; /* Moved 30px to the left */
+        }
+  </style>
+  <script>
+   function toggleDropdown() {
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            var isClickInside = document.querySelector('.profile').contains(event.target);
+            if (!isClickInside) {
+                document.getElementById('dropdown-menu').style.display = 'none';
+            }
+        });
+  </script>
+ </head>
+ <body>
+    <header class="header">
+        <div class="left">
+         <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="40"/>
+         <h1>
+          HealSmart
+         </h1>
+        </div>
+        <nav>
+         <div class="profile">
+          <i class="fas fa-user-circle profile-icon" onclick="toggleDropdown()">
+          </i>
+          <div class="dropdown" id="dropdown-menu">
+             <a href="./dummyAH.html">
+                 Home
+                </a>
+                <a href="./dummyAHManagebooking.html">
+                 Manage Booking
+                </a>
+                <a href="./dummyAHManagedoctors.html">
+                 Manage Doctors
+                </a>
+           </a>
+           <a href="#" onclick="confirmLogout()">Logout</a>
+          </div>
+         </div>
+        </nav>
+       </header>
+  <button class="back-button">
+   <i class="fas fa-arrow-left">
+   </i>
+  </button>
+  <div class="content">
+   <div class="booking-card">
+    <h2>
+     Bookings
+    </h2>
+    <button class="nav-button prev">
+     <i class="fas fa-arrow-left">
+     </i>
+    </button>
+    <button class="nav-button next">
+     <i class="fas fa-arrow-right">
+     </i>
+    </button>
+    <div class="details">
+     <div class="half">
+      <img alt="Patient Image" height="120" src="https://storage.googleapis.com/a1aa/image/BhRLXjNsefv8HEqhQzggHnmhT6uwtanQP9Vk4gWU421Kro9TA.jpg" width="120"/>
+      <div class="info">
+       <p>
+        Patient Name: Patient I
+       </p>
+       <p>
+        User E-Mail: User1@gmail.com
+       </p>
+       <p>
+        Appointment Date: 30/06/2024
+       </p>
+       <p>
+        Appointment Time: 08:30AM - 09:00AM
+       </p>
+       <p>
+        Status: Offline Consultation
+       </p>
+      </div>
+     </div>
+     <div class="divider">
+     </div>
+     <div class="half">
+      <img alt="Doctor Image" height="120" src="https://storage.googleapis.com/a1aa/image/rmhvvnjSTPLoAJRjKQPg1wuZ1xqQc5lfBSxqvziYWP2kV0eTA.jpg" width="120"/>
+      <div class="info">
+       <p>
+        Doctor Name: Doctor I
+       </p>
+       <p>
+        Speciality: Physio Therapist
+       </p>
+       <p>
+        Doctor E-Mail: Doctor1@gmail.com
+       </p>
+       <p>
+        Payment Status: Done
+       </p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <footer class="footer">
+   <div class="contact-info">
+    <img alt="HealSmart Logo" height="50" src="https://storage.googleapis.com/a1aa/image/S6D6yQdeUtRVeErBYf5OfIqSjMs8f3kXoeNXrELRidlPOJafJA.jpg" width="50"/>
+    <h1>
+     HealSmart
+    </h1>
+   </div>
+   <div class="links">
+    <p>
+    </p>
+   </div>
+   <div class="bottom-links">
+    <p>
+    </p>
+   </div>
+   <div class="contact-details" style="bottom: 30px;">
+    <p>
+     Email: info@healsmart.com
+    </p>
+    <p>
+     Phone: +91 96222 84676
+    </p>
+   </div>
+   <div class="policies">
+    <p>
+     <a href="#" style="color: #fff; text-decoration: none;">
+      Privacy Policy
+     </a>
+     |
+     <a href="#" style="color: #fff; text-decoration: none;">
+      Terms and Conditions
+     </a>
+    </p>
+   </div>
+   <div class="copyright">
+    <p>
+     © 2023 HealSmart
+    </p>
+   </div>
+  </footer>
+  <script>
+    function confirmLogout() {
+            const confirmed = confirm("Are you sure you want to log out?");
+            if (confirmed) {
+                window.location.href = "Home.html"; // Redirect to the logout page
+            }
+        }
+    
+  </script>
+ </body>
+</html>
