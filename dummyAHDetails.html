@@ -1,13 +1,19 @@
 <html>
-<head>
-    <title>HealSmart</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <style>
-        body {
+ <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+   Doctor Details
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #2b2b2b;
-            color: #fff;
+            background-color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .header {
             background-color: #bfa2db;
@@ -77,59 +83,72 @@
         .profile.active .dropdown {
             display: block;
         }
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 160px);
-            background: url('https://placehold.co/800x600') no-repeat center center;
-            background-size: cover;
-        }
-        .booking-card {
-            background-color: #dfe6e9;
-            border-radius: 10px;
+        .container {
+            background-color: #bdc3c7;
+            margin: 20px auto;
             padding: 20px;
-            width: 1200px;
-            height: 600px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            height: auto; /* Adjusted height */
             position: relative;
         }
-        .booking-card h2 {
+        .container h1 {
             margin-top: 0;
-            color: #2d3436;
-            font-size: 32px;
             display: inline-block;
         }
-        .booking-card .details {
-            background-color: #6c5ce7;
-            border-radius: 10px;
+        .details {
+            display: flex;
+            justify-content: space-between;
+            background-color: #8e44ad;
             padding: 20px;
-            color: #fff;
-            display: flex;
-            height: calc(100% - 100px);
+            border-radius: 10px;
+            color: white;
+            position: relative;
         }
-        .booking-card .details .half {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .booking-card .details .divider {
-            width: 2px;
-            background-color: rgba(255, 255, 255, 0.5);
-            margin: 0 20px;
-        }
-        .booking-card .details img {
-            width: 120px;
-            height: 120px;
+        .details img {
+            width: 100px;
+            height: 100px;
             background-color: #00aaff;
             border-radius: 10px;
-            margin-bottom: 10px;
         }
-        .booking-card .details .info {
+        .details .info {
             flex: 1;
             margin-left: 20px;
-            font-size: 24px;
+        }
+        .details .info p {
+            margin: 15px 0;
+            font-size: 18px; /* Increased font size */
+        }
+        .details .info .view-button {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .details .info .equal-spacing {
+            margin: 10px 0;
+        }
+        .details .banking {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .details .banking p {
+            margin: 15px 0;
+            font-size: 18px; /* Increased font size */
+        }
+        .details .separator {
+            position: absolute;
+            top: 10%;
+            bottom: 10%;
+            left: 50%;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(-50%);
         }
         .footer {
             background-color: #000;
@@ -242,124 +261,139 @@
         }
         .nav-button.prev {
             top: 10px;
-            right: 90px; /* Moved 30px to the left */
+            right: 70px; /* Moved 10px to the left */
         }
         .nav-button.next {
             top: 10px;
-            right: 40px; /* Moved 30px to the left */
+            right: 20px; /* Moved 10px to the left */
         }
   </style>
   <script>
    function toggleDropdown() {
-            var dropdownMenu = document.getElementById('dropdown-menu');
-            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
-                dropdownMenu.style.display = "block";
-            } else {
-                dropdownMenu.style.display = "none";
-            }
+        var dropdownMenu = document.getElementById('dropdown-menu');
+        if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+            dropdownMenu.style.display = "block";
+        } else {
+            dropdownMenu.style.display = "none";
         }
+    }
 
-        document.addEventListener('click', function(event) {
-            var isClickInside = document.querySelector('.profile').contains(event.target);
-            if (!isClickInside) {
-                document.getElementById('dropdown-menu').style.display = 'none';
-            }
-        });
+    document.addEventListener('click', function(event) {
+        var isClickInside = document.querySelector('.profile').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById('dropdown-menu').style.display = 'none';
+        }
+    });
   </script>
  </head>
  <body>
-    <header class="header">
-        <div class="left">
-         <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="40"/>
-         <h1>
-          HealSmart
-         </h1>
-        </div>
-        <nav>
-         <div class="profile">
-          <i class="fas fa-user-circle profile-icon" onclick="toggleDropdown()">
-          </i>
-          <div class="dropdown" id="dropdown-menu">
-             <a href="./dummyAH.html">
-                 Home
-                </a>
-                <a href="./dummyAHManagebooking.html">
-                 Manage Booking
-                </a>
-                <a href="./dummyAHManagedoctors.html">
-                 Manage Doctors
-                </a>
+  <header class="header">
+   <div class="left">
+    <img alt="HealSmart Logo" height="40" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="40"/>
+    <h1>
+     HealSmart
+    </h1>
+   </div>
+   <nav>
+    <div class="profile">
+     <i class="fas fa-user-circle profile-icon" onclick="toggleDropdown()">
+     </i>
+     <div class="dropdown" id="dropdown-menu">
+        <a href="./dummyAH.html">
+            Home
            </a>
-           <a href="#">
-            Log Out
+           <a href="./dummyAHManagebooking.html">
+            Manage Booking
            </a>
-          </div>
-         </div>
-        </nav>
-       </header>
+           <a href="./dummyAHManagedoctors.html">
+            Manage Doctors
+           </a>
+      </a>
+      <a href="#">
+       Log Out
+      </a>
+     </div>
+    </div>
+   </nav>
+  </header>
   <button class="back-button">
    <i class="fas fa-arrow-left">
    </i>
   </button>
-  <div class="content">
-   <div class="booking-card">
-    <h2>
-     Bookings
-    </h2>
-    <button class="nav-button prev">
-     <i class="fas fa-arrow-left">
-     </i>
-    </button>
-    <button class="nav-button next">
-     <i class="fas fa-arrow-right">
-     </i>
-    </button>
-    <div class="details">
-     <div class="half">
-      <img alt="Patient Image" height="120" src="https://storage.googleapis.com/a1aa/image/BhRLXjNsefv8HEqhQzggHnmhT6uwtanQP9Vk4gWU421Kro9TA.jpg" width="120"/>
-      <div class="info">
-       <p>
-        Patient Name: Patient I
-       </p>
-       <p>
-        User E-Mail: User1@gmail.com
-       </p>
-       <p>
-        Appointment Date: 30/06/2024
-       </p>
-       <p>
-        Appointment Time: 08:30AM - 09:00AM
-       </p>
-       <p>
-        Status: Offline Consultation
-       </p>
-      </div>
-     </div>
-     <div class="divider">
-     </div>
-     <div class="half">
-      <img alt="Doctor Image" height="120" src="https://storage.googleapis.com/a1aa/image/rmhvvnjSTPLoAJRjKQPg1wuZ1xqQc5lfBSxqvziYWP2kV0eTA.jpg" width="120"/>
-      <div class="info">
-       <p>
-        Doctor Name: Doctor I
-       </p>
-       <p>
-        Speciality: Physio Therapist
-       </p>
-       <p>
-        Doctor E-Mail: Doctor1@gmail.com
-       </p>
-       <p>
-        Payment Status: Done
-       </p>
-      </div>
-     </div>
+  <div class="container" style="height: 500px;">
+   <h1>
+    Doctor Details!
+   </h1>
+   <button class="nav-button prev">
+    <i class="fas fa-arrow-left">
+    </i>
+   </button>
+   <button class="nav-button next">
+    <i class="fas fa-arrow-right">
+    </i>
+   </button>
+   <div class="details">
+    <div class="info">
+     <img alt="Doctor's Profile Picture" height="100" src="https://storage.googleapis.com/a1aa/image/qA1OomNe8PTJaKGxgymBIyoP8bjTKbP9qFl488bYCQjHTf8TA.jpg" width="100"/>
+     <p>
+      Name: Doctor I
+     </p>
+     <p>
+      Type: Physio Therapist
+     </p>
+     <p>
+      Contact Number: 7894561230
+     </p>
+     <p class="equal-spacing">
+      E-Mail: DoctorI@gmail.com
+     </p>
+     <p class="equal-spacing">
+      Latest Degree Certificate:
+      <button class="view-button">
+       View
+      </button>
+     </p>
+     <p class="equal-spacing">
+      Government Issued ID:
+      <button class="view-button">
+       View
+      </button>
+     </p>
+     <p class="equal-spacing">
+      Medical License Number: I236457890
+     </p>
+    </div>
+    <div class="separator"></div>
+    <div class="banking">
+     <h2>
+      BANKING DETAILS
+     </h2>
+     <p>
+      Account Number
+      <br/>
+      XXXXXXXXXX
+     </p>
+     <p>
+      IFSC Code
+      <br/>
+      XXXXXXXXXX
+     </p>
+     <p>
+      Bank Name
+      <br/>
+      XXXXXXXXXX
+     </p>
+     <p>
+      Branch Name
+      <br/>
+      XXXXXXXXXX
+     </p>
     </div>
    </div>
   </div>
   <footer class="footer">
    <div class="contact-info">
-    <img alt="HealSmart Logo" height="50" src="https://storage.googleapis.com/a1aa/image/S6D6yQdeUtRVeErBYf5OfIqSjMs8f3kXoeNXrELRidlPOJafJA.jpg" width="50"/>
+    <img alt="HealSmart Logo" height="50" src="https://storage.googleapis.com/a1aa/image/mdIgNafhSSwEbKRQgLDNPkVWcl0LKVmoPreaetibUnoiM95nA.jpg" width="50"/>
     <h1>
      HealSmart
     </h1>
