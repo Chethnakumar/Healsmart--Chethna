@@ -105,33 +105,70 @@
             margin-top: 20px;
         }
 
-        footer {
+        .footer {
             background-color: #000;
             color: #fff;
             padding: 20px;
-            text-align: left;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            text-align: center;
+           /* margin-top: 10px; */
         }
 
-        footer img {
-            height: 40px;
+        .contact-info {
+            flex: 1;
+            text-align: left;
         }
 
-        footer a {
-            color: #fff;
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
             text-decoration: none;
         }
 
-        footer a:hover {
+        .contact-us a:hover {
             text-decoration: underline;
         }
 
         @media (max-width: 768px) {
-            .container {
-                width: 90%;
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info,
+            .social-contact,
+            .contact-us {
+                flex: none;
+                width: 100%;
+            }
+
+            .social-contact {
+                margin-top: 20px;
+            }
+
+            .contact-us {
+                margin-top: 20px;
             }
         }
     </style>
@@ -176,17 +213,39 @@
         </form>
     </div>
 
-    <footer>
-        <div>
-            <img alt="HealSmart Logo" src="./Images/logo.jpg" />
-            <h1>HealSmart</h1>
+    <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
             <p>Email: info@healsmart.com</p>
-            <p>Phone: +91 96222 54876</p>
+            <p>Phone: +1 123 456 7890</p>
         </div>
-        <div>
-            <a href="#">Privacy Policy</a> | <a href="#">Terms and Conditions</a>
+
+        <div class="contact-us">
+            <a href="USContactUs.html">Contact Us</a>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
         </div>
-        <p>© 2024 HealSmart</p>
+
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
     </footer>
 
     <script>
