@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basketball: Tips & Recommendations - HealSmart</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         body {
             margin: 0;
@@ -15,8 +19,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            /* padding: 20px; */
         }
+
         .header {
             background-color: #bfa2db;
             padding: 15px;
@@ -26,26 +31,32 @@
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         .header .left {
             display: flex;
             align-items: center;
         }
+
         .header .left img {
             height: 50px;
         }
+
         .header .left h1 {
             margin-left: 15px;
             font-size: 28px;
             color: black;
         }
+
         .header .profile {
             position: relative;
             cursor: pointer;
         }
+
         .header .profile .profile-icon {
             font-size: 40px;
             color: black;
         }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -58,6 +69,7 @@
             width: 200px;
             padding: 10px 0;
         }
+
         .dropdown a {
             padding: 12px 20px;
             display: block;
@@ -65,12 +77,15 @@
             text-decoration: none;
             border-bottom: 1px solid #f1f1f1;
         }
+
         .dropdown a:hover {
             background-color: #f1f1f1;
         }
+
         .profile.active .dropdown {
             display: block;
         }
+
         .content {
             padding: 20px;
             max-width: 1200px;
@@ -81,48 +96,58 @@
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            /* align-items: flex-start; */
         }
+
         .title-section {
             text-align: center;
             margin-bottom: 20px;
             width: 100%;
         }
+
         .title-section h2 {
             font-size: 30px;
             color: #4e4e4e;
             margin-bottom: 10px;
         }
+
         .title-section p {
             font-size: 18px;
             color: #777;
         }
+
         .section-title {
             font-size: 24px;
             margin-top: 30px;
             color: #4e4e4e;
         }
+
         .section-content {
             margin-top: 10px;
             font-size: 16px;
             line-height: 1.6;
         }
+
         .list-item {
             margin-bottom: 8px;
         }
+
         .video-link {
             text-decoration: none;
             color: #2e64fe;
             font-weight: bold;
         }
+
         .video-link:hover {
             text-decoration: underline;
         }
+
         .button-container {
             text-align: center;
             margin-top: 30px;
             width: 100%;
         }
+
         .book-consultation {
             background-color: #4e73df;
             color: white;
@@ -132,9 +157,11 @@
             text-decoration: none;
             transition: background-color 0.3s ease;
         }
+
         .book-consultation:hover {
             background-color: #3e5bb5;
         }
+
         .footer {
             background-color: #000;
             color: #fff;
@@ -143,16 +170,19 @@
             margin-top: 40px;
             width: 100%;
         }
+
         /* Adjusted image section */
         .image-container {
             width: 40%;
             margin-left: 20px;
         }
+
         .image-container img {
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
+
         /* Video container horizontally scrollable */
         .video-container {
             display: flex;
@@ -162,143 +192,315 @@
             width: 100%;
             justify-content: center;
         }
+
         .video-container iframe {
             width: 300px;
             height: 200px;
             border-radius: 8px;
         }
-        .gear-links a {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 16px;
-            color: #4e73df;
+
+        .gear-links {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            /* Space between items */
+            margin: 20px 0;
         }
-        .gear-links a:hover {
+
+        .gear-item {
+            text-align: center;
+            flex: 1;
+            /* Ensures equal width for each item */
+        }
+
+        .gear-item a {
+            text-decoration: none;
+            color: #000;
+            /* Set text color */
+        }
+
+        .gear-image {
+            width: 80%;
+            /* Image width adjustment */
+            height: auto;
+            margin-bottom: 10px;
+            /* Space between image and text */
+        }
+
+        .gear-item p {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel-inner img {
+            max-height: 1000px;
+            object-fit: cover;
+        }
+
+        .carousel-inner {
+            position: relative;
+            width: 76%;
+            overflow: hidden;
+            left: 10%;
+        }
+
+        .footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .social-contact {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-us {
+            flex: 1;
+            text-align: center;
+        }
+
+        .social-contact a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .social-contact a:hover {
+            color: #ddd;
+        }
+
+        .contact-us a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-us a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
+
 <body>
 
-<header class="header">
-    <div class="left">
-        <img alt="HealSmart Logo" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
-        <h1>HealSmart</h1>
-    </div>
-    <div class="profile" onclick="toggleDropdown()">
-        <i class="fas fa-user-circle profile-icon"></i>
-        <div class="dropdown">
-            <a href="USHomePage.html">Home</a>
-            <a href="USProfile.html">Profile</a>
-            <a href="USPrevention.html">Prevention</a>
-            <a href="USBookConsultation.html">Consultation</a>
-            <a href="USMyBookings.html">My Bookings</a>
-            <a href="#" onclick="confirmLogout()">Logout</a>
+    <header class="header">
+        <div class="left">
+            <img alt="HealSmart Logo"
+                src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg"
+                width="40" />
+            <h1>HealSmart</h1>
         </div>
-    </div>
-</header>
-
-<div class="content">
-    <!-- Title and Subtitle -->
-    <div class="title-section">
-        <h2>Basketball: Tips & Recommendations</h2>
-        <p>Learn the fundamentals, improve your game, and stay injury-free with these expert recommendations.</p>
-    </div>
-
-    <!-- Common Benefits -->
-    <div class="section" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
-        <div style="flex: 1;">
-            <h3 class="section-title">Common Benefits of Basketball</h3>
-            <div class="section-content">
-                <ul>
-                    <li class="list-item">Improves cardiovascular health.</li>
-                    <li class="list-item">Builds strength and endurance.</li>
-                    <li class="list-item">Enhances teamwork and coordination.</li>
-                    <li class="list-item">Boosts mental focus and concentration.</li>
-                </ul>
+        <div class="profile" onclick="toggleDropdown()">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <div class="dropdown">
+                <a href="USHomePage.html">Home</a>
+                <a href="USProfile.html">Profile</a>
+                <a href="USPrevention.html">Prevention</a>
+                <a href="USBookConsultation.html">Consultation</a>
+                <a href="USMyBookings.html">My Bookings</a>
+                <a href="#" onclick="confirmLogout()">Logout</a>
             </div>
         </div>
+    </header>
+
+    <div class="content">
+        <!-- Title and Subtitle -->
+        <div class="title-section">
+            <h2>Basketball: Tips & Recommendations</h2>
+            <p>Learn the fundamentals, improve your game, and stay injury-free with these expert recommendations.</p>
+        </div>
+
+        <!-- Common Benefits -->
+        <div class="section"
+            style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1;">
+                <h3 class="section-title">Common Benefits of Basketball</h3>
+                <div class="section-content">
+                    <ul>
+                        <li class="list-item">Improves cardiovascular health.</li>
+                        <li class="list-item">Builds strength and endurance.</li>
+                        <li class="list-item">Enhances teamwork and coordination.</li>
+                        <li class="list-item">Boosts mental focus and concentration.</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <h3 class="section-title">Risks & Safety Tips</h3>
+                <div class="section-content">
+                    <ul>
+                        <li class="list-item">Knee injuries from abrupt movements.</li>
+                        <li class="list-item">Ankle sprains due to quick pivots and jumps.</li>
+                        <li class="list-item">Concussions from collisions.</li>
+                        <li class="list-item">Ensure proper warm-up and stretching before games.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
         <!-- Image for Benefits -->
-        <div class="image-container">
-            <img src="https://via.placeholder.com/600x400.png?text=Benefits+of+Basketball" alt="Benefits of Basketball">
+        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <h3 class=" text-center">Common Injuries</h3>
+            <h5 class=" text-center">Click below to get full details on a specific injury</h5>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="https://css.glass/"> <img src="Images/heal-smart.jpg" class="d-block w-100"
+                            alt="Benefits of Basketball">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="https://css.glass/"> <img src="Images/heal-smart.jpg" class="d-block w-100"
+                        alt="Benefits of Basketball">
+                </a>                </div>
+                <div class="carousel-item">
+                    <a href="https://css.glass/"> <img src="Images/heal-smart.jpg" class="d-block w-100"
+                        alt="Benefits of Basketball">
+                </a>                </div>
+                <div class="carousel-item">
+                    <a href="https://css.glass/"> <img src="Images/heal-smart.jpg" class="d-block w-100"
+                        alt="Benefits of Basketball">
+                </a>                </div>
+                <div class="carousel-item">
+                    <a href="https://css.glass/"> <img src="Images/heal-smart.jpg" class="d-block w-100"
+                        alt="Benefits of Basketball">
+                </a>                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-    </div>
 
-    <!-- Risks and Safety Tips -->
-    <div class="section" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;">
-        <div style="flex: 1;">
-            <h3 class="section-title">Risks & Safety Tips</h3>
+
+
+        <!-- Recommended Exercises -->
+        <div class="section">
+            <h3 class="section-title">Recommended Exercises</h3>
             <div class="section-content">
+                <p>Here are some exercises that can improve your basketball performance and reduce the risk of injury:
+                </p>
                 <ul>
-                    <li class="list-item">Knee injuries from abrupt movements.</li>
-                    <li class="list-item">Ankle sprains due to quick pivots and jumps.</li>
-                    <li class="list-item">Concussions from collisions.</li>
-                    <li class="list-item">Ensure proper warm-up and stretching before games.</li>
+                    <li class="list-item">Strength training for lower body muscles.</li>
+                    <li class="list-item">Ankle and knee stretches to enhance mobility.</li>
+                    <li class="list-item">Plyometric exercises to increase jump height.</li>
                 </ul>
             </div>
-        </div>
-        <!-- Image for Risks -->
-        <div class="image-container">
-            <img src="https://via.placeholder.com/600x400.png?text=Risks+in+Basketball" alt="Risks in Basketball">
-        </div>
-    </div>
-
-    <!-- Recommended Exercises -->
-    <div class="section">
-        <h3 class="section-title">Recommended Exercises</h3>
-        <div class="section-content">
-            <p>Here are some exercises that can improve your basketball performance and reduce the risk of injury:</p>
-            <ul>
-                <li class="list-item">Strength training for lower body muscles.</li>
-                <li class="list-item">Ankle and knee stretches to enhance mobility.</li>
-                <li class="list-item">Plyometric exercises to increase jump height.</li>
-            </ul>
-        </div>
-        <!-- Exercise Video Links -->
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/xxx" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/xxx" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/xxx" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <!-- Gear Recommendations -->
-    <div class="section">
-        <h3 class="section-title">Recommended Gear</h3>
-        <div class="section-content">
-            <p>Check out these essential basketball gear recommendations:</p>
-            <div class="gear-links">
-                <a href="https://www.amazon.com" target="_blank">Basketball Shoes</a>
-                <a href="https://www.amazon.com" target="_blank">Compression Sleeves</a>
-                <a href="https://www.amazon.com" target="_blank">Sports Protection Gear</a>
+            <!-- Exercise Video Links -->
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/xxx" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/xxx" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/xxx" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
         </div>
+
+        <!-- Gear Recommendations -->
+        <div class="section">
+            <h3 class="section-title">Recommended Gear</h3>
+            <div class="section-content">
+                <p>Check out these essential basketball gear recommendations:</p>
+                <div class="gear-links">
+                    <div class="gear-item">
+                        <a href="https://www.amazon.com" target="_blank">
+                            <img src="Images/heal-smart.jpg" alt="Ankle Brace Support" class="gear-image" />
+                            <p>Basketball Shoes</p>
+                        </a>
+                    </div>
+                    <div class="gear-item">
+                        <a href="https://www.amazon.com" target="_blank">
+                            <img src="Images/heal-smart.jpg" alt="Compression Sleeves" class="gear-image" />
+                            <p>Compression Sleeves</p>
+                        </a>
+                    </div>
+                    <div class="gear-item">
+                        <a href="https://www.amazon.com" target="_blank">
+                            <img src="Images/heal-smart.jpg" alt="Proper Footwear for Sports" class="gear-image" />
+                            <p>Protection</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Book Consultation Button -->
+        <div class="button-container">
+            <h3 style="font-size: 19px;font-weight: bold;">For Personalized Care</h3>
+            <a href="USBookConsultation.html" class="book-consultation">Book Consultation</a>
+        </div>
     </div>
 
-    <!-- Book Consultation Button -->
-    <div class="button-container">
-        <h3>For Personalized Care</h3>
-        <a href="USBookConsultation.html" class="book-consultation">Book Consultation</a>
-    </div>
-</div>
+    <footer class="footer">
+        <div class="contact-info text-left">
+            <div class="flex items-center mb-4">
+                <img alt="HealSmart Logo" class="h-10 mr-2" height="40" src="https://storage.googleapis.com/a1aa/image/lj9tvyGQIi5KGVQSpK7XlwFtAha5lnDeXgfsjkfCHPmiZF8nA.jpg" width="40"/>
+                <span class="text-xl font-bold">HealSmart</span>
+            </div>
+            <p>Email: info@healsmart.com</p>
+            <p>Phone: +1 123 456 7890</p>
+        </div>
 
-<footer class="footer">
-    <p>© 2024 HealSmart</p>
-</footer>
+        <div class="contact-us">
+            <a href="USContactUs.html">Contact Us</a>
+            <p><a href="#" class="text-white">Privacy Policy</a> | <a href="#" class="text-white">Terms and Conditions</a></p>
+        </div>
 
-<script>
-    function toggleDropdown() {
-        const profile = document.querySelector('.profile');
-        profile.classList.toggle('active');
-    }
+        <div class="social-contact text-right">
+            <p class="mb-3">You can Follow us on:</p>
+            <div class="flex justify-center mb-3">
+                <a class="mx-1" href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="mx-1" href="#">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <p>© 2024 HealSmart</p>
+        </div>
+    </footer>
 
-    function confirmLogout() {
-        const confirmed = confirm("Are you sure you want to log out?");
-        if (confirmed) {
-            window.location.href = "Home.html"; // Redirect to the logout page
+    <script>
+        function toggleDropdown() {
+            const profile = document.querySelector('.profile');
+            profile.classList.toggle('active');
         }
-    }
-</script>
+
+        function confirmLogout() {
+            const confirmed = confirm("Are you sure you want to log out?");
+            if (confirmed) {
+                window.location.href = "Home.html"; // Redirect to the logout page
+            }
+        }
+    </script>
 
 </body>
+
 </html>

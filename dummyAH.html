@@ -307,7 +307,7 @@
                 <a href="./dummyAH.html">Home</a>
                 <a href="./dummyAHManagebooking.html">Manage Bookings</a>
                 <a href="./dummyAHManagedoctors.html">Manage Doctors</a>
-                <a href="LOGOUT.html">Logout</a>
+                <a href="#" onclick="confirmLogout()">Logout</a>
             </div>
         </div>
     </header>
@@ -331,33 +331,9 @@
       <span>
        -&gt; User raised a issue
       </span>
-      <button>
+      <a href="dummyAHIssueVerify.html"><button>
        View
-      </button>
-     </div>
-     <div class="notification-item">
-      <span>
-       -&gt; Another notification
-      </span>
-      <button>
-       View
-      </button>
-     </div>
-     <div class="notification-item">
-      <span>
-       -&gt; Another notification
-      </span>
-      <button>
-       View
-      </button>
-     </div>
-     <div class="notification-item">
-      <span>
-       -&gt; Another notification
-      </span>
-      <button>
-       View
-      </button>
+      </button></a>
      </div>
     </div>
     <div class="bookings">
@@ -384,9 +360,9 @@
          Status: Offline Consultation
         </p>
        </div>
-       <button>
+       <a href="dummyAHBookings.html"><button>
         View Details
-       </button>
+       </button></a>
       </div>
       <div class="booking-item">
        <img alt="Patient Image" height="80" src="https://storage.googleapis.com/a1aa/image/hx0UXscgwpZRMpZrkZThuhjoF8XKu0jjN89vjuwgYA6qUgfJA.jpg" width="80"/>
@@ -584,5 +560,15 @@
     </a>
    </div>
   </footer>
+  <script>
+
+    function confirmLogout() {
+            const confirmed = confirm("Are you sure you want to log out?");
+            if (confirmed) {
+                window.location.href = "Home.html"; // Redirect to the logout page
+            }
+        }
+    
+  </script>
  </body>
 </html>
