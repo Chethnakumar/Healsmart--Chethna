@@ -258,27 +258,40 @@
     <script>
         // Submit Query Function
         function submitQuery() {
-            const queryText = document.querySelector('textarea').value;
-            if (queryText.trim()) {
-                alert(`Query submitted for Dr. John Doe\nQuery: ${queryText}`);
-                // Here you would typically send the query to the backend
-            } else {
-                alert('Please provide some details for your query.');
-            }
-        }
-
-        // Toggle Dropdown Function for Profile
-        function toggleDropdown() {
-            const profile = document.querySelector('.profile');
-            profile.classList.toggle('active');
-        }
-
-        function confirmLogout() {
-        const confirmed = confirm("Are you sure you want to log out?");
-        if (confirmed) {
-            window.location.href = "Home.html"; // Redirect to the logout page
-        }
+    const queryText = document.querySelector('textarea').value.trim();
+    if (!queryText) {
+        alert('Please provide some details for your query.');
+        return;
     }
+
+    // Prepare request body
+    const queryData = {
+        writequery: queryText
+    };
+
+    // Send request to backend
+    fetch('http://localhost:3000/api/queries', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(queryData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Query created successfully') {
+            alert('Your query has been submitted successfully!');
+            document.querySelector('textarea').value = ''; // Clear input field
+        } else {
+            alert('Error submitting query: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to submit query. Please try again.');
+    });
+}
+
     </script>
 
     <!-- Footer -->

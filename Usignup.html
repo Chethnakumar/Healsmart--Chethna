@@ -162,9 +162,12 @@
   <div class="container">
     <div class="form-container">
       <h1>User Signup</h1>
-    <form onsubmit="handleSignup(event)">
+    <form onsubmit="handleSignup(event)"  enctype="multipart/form-data">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
+
+        <label for="profilePicture">Profile Picture:</label>
+        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" required><br><br>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
@@ -223,41 +226,29 @@
             <p>© 2024 HealSmart</p>
         </div>
     </footer>
-<script>
-      
-      async function handleSignup(event) {
+    <script>
+        async function handleSignup(event) {
             event.preventDefault();
-
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const phonenumber = document.getElementById("phonenumber").value;
-            const age = document.getElementById("age").value;
-            const gender = document.getElementById("gender").value;
-            const createpassword = document.getElementById("password").value;
-
-            const userData = {
-                name,
-                email,
-                phonenumber,
-                age,
-                gender,
-                createpassword,
-            };
-
+    
+            const formData = new FormData();
+            formData.append("name", document.getElementById("name").value);
+            formData.append("email", document.getElementById("email").value);
+            formData.append("phonenumber", document.getElementById("phonenumber").value);
+            formData.append("age", document.getElementById("age").value);
+            formData.append("gender", document.getElementById("gender").value);
+            formData.append("createpassword", document.getElementById("password").value);
+            formData.append("profilePicture", document.getElementById("profilePicture").files[0]); // File upload
+    
             try {
                 const response = await fetch("http://localhost:3000/api/usersignup", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(userData),
+                    body: formData, // FormData instead of JSON
                 });
-
+    
                 if (response.ok) {
                     const result = await response.json();
                     alert("Signup successful!");
-                    // Redirect to another page
-                    window.location.href = "USHomePage.html"; // Update with your next page URL
+                    window.location.href = "USHomePage.html";
                 } else {
                     const error = await response.json();
                     alert("Signup failed: " + (error.message || "Unknown error"));
@@ -266,8 +257,8 @@
                 alert("An error occurred: " + err.message);
             }
         }
-
-</script>
+    </script>
+    
  
 </body>
 </html>

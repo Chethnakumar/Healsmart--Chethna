@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const User = require('../Backend/model/user-model');
+// const User = require('../Backend/model/user-model');
 const usersignup = require('./routes/usersignup-route');
-const userRoute = require('../Backend/routes/user-route');
+// const userRoute = require('../Backend/routes/user-route');
 const reviewRoutes = require('../Backend/routes/review-route');
 const docproRoutes = require('./routes/docpro-route');
 const queryRoutes = require('../Backend/routes/query-route');
@@ -19,11 +19,11 @@ const uspreventionRoutes = require('./routes/usprevention-route');
 const rejectionRoutes = require('./routes/reject-route');
 const app = express();
 //const errorMiddleware = require('./utils/errorhandler');
-
-
+app.use('/uploads', express.static('uploads'));
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+// app.use(express.)
 //app.use(errorMiddleware);
 
 const cors = require('cors');
@@ -37,8 +37,9 @@ app.get('/', function (req, res) {
   res.send('Hello from API');
 });
 
+
 // routes
-app.use('/api/users', userRoute);
+// app.use('/api/users', userRoute);
 app.use('/api/usersignup', usersignup);
 app.use('/api/reviews', reviewRoutes);
 app.use("/api/docpro", docproRoutes);

@@ -3,14 +3,14 @@ const Query = require('../model/query-model');
 // Create a new query
 const createQuery = async (req, res) => {
     try {
-        const { doctorName, writequery } = req.body;
+        const {writequery } = req.body;
 
         // Validate request body
-        if (!doctorName || !writequery) {
-            return res.status(400).json({ message: 'Doctor name and query are required' });
+        if (!writequery) {
+            return res.status(400).json({ message: 'query required' });
         }
 
-        const newQuery = new Query({ doctorName, writequery });
+        const newQuery = new Query({ writequery });
         const savedQuery = await newQuery.save();
 
         res.status(201).json({ message: 'Query created successfully', data: savedQuery });

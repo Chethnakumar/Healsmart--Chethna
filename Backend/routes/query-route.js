@@ -6,7 +6,7 @@ const { createQuery, getAllQueries, getQueryById } = require('../controllers/que
 router.get('/', getAllQueries);
 
 // Route to get reviews for a specific doctor
-router.get('/:doctorName', getQueryById);
+router.get('/:id', getQueryById);
 
 // Route to add a new review
 router.post('/', createQuery);

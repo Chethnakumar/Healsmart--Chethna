@@ -31,6 +31,11 @@ const UsersignupSchema = mongoose.Schema(
         createpassword: {
             type: String,
             required: true
+        },
+
+        profilePicture: {
+            type: String,
+            required: true
         }
     },
 
