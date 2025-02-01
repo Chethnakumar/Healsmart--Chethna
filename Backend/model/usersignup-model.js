@@ -1,49 +1,13 @@
-const mongoose = require('mongoose');
-const { type } = require('os');
+const mongoose = require("mongoose");
 
-const UsersignupSchema = mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: [true, "please enter your name"]
-        },
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    phonenumber: { type: String, required: true },
+    age: { type: Number, required: true },
+    gender: { type: String, required: true },
+    password: { type: String, required: true },
+    profilePicture: { type: String } // Path to uploaded profile picture
+});
 
-        email: {
-            type: String,
-            required: true
-        },
-
-        phonenumber: {
-            type: Number,
-            required: true
-        },
-
-        age: {
-            type: Number,
-            required: true
-        },
-
-        gender: {
-            type: String,
-            required: true
-        },
-
-        createpassword: {
-            type: String,
-            required: true
-        },
-
-        profilePicture: {
-            type: String,
-            required: true
-        }
-    },
-
-    {
-        timestamps: true,
-    }
-);
-
-const usersignup = mongoose.model("Usersignup", UsersignupSchema);
-
-module.exports = usersignup;
+module.exports = mongoose.model("User", userSchema);

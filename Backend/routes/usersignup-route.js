@@ -1,16 +1,23 @@
 const express = require("express");
-const User = require("../model/usersignup-model.js");
+const multer = require("multer");
+const { userSignup, getUser, getAllUsers, updateUser, deleteUser } = require("../controllers/usersignup-controller");
+
 const router = express.Router();
-const {getUs, getU, createU, updateU, deleteU} = require('../controllers/usersignup-controller.js');
+const upload = multer({ dest: "uploads/" });
 
-router.get('/', getUs);
+router.post("/", upload.single("profilePicture"), userSignup);
 
-router.get("/:id", getU);
+// GET: Single User
+router.get("/:id", getUser);
 
-router.post("/", createU);
+// GET: All Users
+router.get("/", getAllUsers);
 
-router.put("/:id", updateU);
+// PUT: Update User
+router.put("/user/:id", upload.single("profilePicture"), updateUser); // Update user route
 
-router.delete("/:id", deleteU);
+
+// DELETE: Delete User
+router.delete("/:id", deleteUser);
 
 module.exports = router;

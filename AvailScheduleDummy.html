@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Availability Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .loading {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h2>Availability Schedule</h2>
+    <div id="loading" class="loading">Loading availability...</div>
+    <table>
+        <thead>
+            <tr>
+                <th>From Date</th>
+                <th>Till Date</th>
+                <th>Time From</th>
+                <th>Time Till</th>
+                <th>Service Type</th>
+            </tr>
+        </thead>
+        <tbody id="availabilityTable">
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("http://localhost:3000/api/availability/")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("availabilityTable");
+                    data.forEach(avail => {
+                        const row = `<tr>
+                            <td>${new Date(avail.fromDate).toLocaleDateString()}</td>
+                            <td>${new Date(avail.tillDate).toLocaleDateString()}</td>
+                            <td>${avail.timeFrom}</td>
+                            <td>${avail.timeTill}</td>
+                            <td>${avail.service}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+
+                    // Hide loading message
+                    document.getElementById('loading').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                    document.getElementById('loading').innerText = 'Failed to load availability data.';
+                });
+        });
+        ///
+    </script>
+</body>
+</html>
