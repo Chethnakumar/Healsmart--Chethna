@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 // const User = require('../Backend/model/user-model');
+const authRoutes = require('./routes/login-route');
 const usersignup = require('./routes/usersignup-route');
 // const userRoute = require('../Backend/routes/user-route');
 const reviewRoutes = require('../Backend/routes/review-route');
@@ -23,6 +25,8 @@ app.use('/uploads', express.static('uploads'));
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // app.use(express.)
 //app.use(errorMiddleware);
 
@@ -41,6 +45,7 @@ app.get('/', function (req, res) {
 // routes
 // app.use('/api/users', userRoute);
 app.use('/api/usersignup', usersignup);
+app.use('/auth', authRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use("/api/docpro", docproRoutes);
 app.use("/api/queries", queryRoutes);
@@ -55,6 +60,7 @@ app.use('/api/login', LoginRoutes);
 app.use('/api/availability', addavailRoutes);
 app.use('/api/userprevent', uspreventionRoutes);
 app.use('/api/reject', rejectionRoutes);
+
 
 // Database connection
 mongoose.connect('mongodb://localhost:27017/healsmart')
