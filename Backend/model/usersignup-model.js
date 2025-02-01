@@ -10,4 +10,5 @@ const userSchema = new mongoose.Schema({
     profilePicture: { type: String } // Path to uploaded profile picture
 });
 
-module.exports = mongoose.model("User", userSchema);
+const UserSignup = mongoose.models.UserSignup || mongoose.model('UserSignup', userSchema);
+module.exports = UserSignup;

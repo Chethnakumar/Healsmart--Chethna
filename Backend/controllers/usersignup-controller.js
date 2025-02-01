@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const User = require("../model/usersignup-model");
 
 exports.userSignup = async (req, res) => {
@@ -10,6 +11,9 @@ exports.userSignup = async (req, res) => {
         if (!req.body.name || !req.body.email || !req.body.phonenumber || !req.body.age || !req.body.gender || !req.body.password) {
             return res.status(400).json({ message: "All fields are required." });
         }
+
+        // Hash the password before saving to the database
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const profilePicturePath = req.file.path;
 

@@ -144,10 +144,10 @@
     <div class="login-container">
         <div class="login-box">
             <h2>Log In</h2>
-            <form>
-                <input placeholder="Email" required="" type="email"/>
-                <input placeholder="Password" required="" type="password"/>
-                <a href="dummyAH.html"><button type="submit">Log In</button></a>
+            <form action="/auth/login" method="POST">
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <button type="submit">Login</button>
             </form>
             <p>© 2024 HealSmart<br/>Terms and Conditions</p>
         </div>
@@ -187,10 +187,31 @@
         </div>
     </footer>
     <script>
-        function toggleDropdown() {
-            const profile = document.querySelector('.profile');
-            profile.classList.toggle('active');
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();  // Prevent page reload
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("http://localhost:5000/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message);
+            window.location.href = data.redirect;  // Redirect to correct home page
+        } else {
+            alert(data.error);  // Show error message
         }
-</script>
+    } catch (error) {
+        alert("Something went wrong!");
+    }
+});
+    </script>>
 </body>
 </html>
