@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const UserSignupSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phonenumber: { type: String, required: true },
@@ -10,5 +10,5 @@ const userSchema = new mongoose.Schema({
     profilePicture: { type: String } // Path to uploaded profile picture
 });
 
-const UserSignup = mongoose.models.UserSignup || mongoose.model('UserSignup', userSchema);
+const UserSignup = mongoose.models.UserSignup || mongoose.model('UserSignup', UserSignupSchema);
 module.exports = UserSignup;
