@@ -28,6 +28,16 @@
             font-weight: bold;
             color: #555;
         }
+        .remove-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: darkred;
+        }
     </style>
 </head>
 <body>
@@ -36,11 +46,11 @@
     <table>
         <thead>
             <tr>
-                <th>From Date</th>
-                <th>Till Date</th>
+                <th>Date</th>
                 <th>Time From</th>
                 <th>Time Till</th>
                 <th>Service Type</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody id="availabilityTable">
@@ -54,18 +64,42 @@
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.getElementById("availabilityTable");
+                    
                     data.forEach(avail => {
-                        const row = `<tr>
-                            <td>${new Date(avail.fromDate).toLocaleDateString()}</td>
-                            <td>${new Date(avail.tillDate).toLocaleDateString()}</td>
-                            <td>${avail.timeFrom}</td>
-                            <td>${avail.timeTill}</td>
-                            <td>${avail.service}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
+                        let startDate = new Date(avail.fromDate);
+                        let endDate = new Date(avail.tillDate);
+                        
+                        while (startDate <= endDate) {
+                            let timeFrom = new Date(`1970-01-01T${avail.timeFrom}`);
+                            let timeTill = new Date(`1970-01-01T${avail.timeTill}`);
+
+                            while (timeFrom < timeTill) {
+                                let nextSlot = new Date(timeFrom);
+                                nextSlot.setMinutes(nextSlot.getMinutes() + 30);
+
+                                if (nextSlot > timeTill) {
+                                    nextSlot = timeTill;
+                                }
+
+                                let statusHTML = avail.booked 
+                                    ? "<span style='color: green; font-weight: bold;'>Booked</span>" 
+                                    : `<button class="remove-btn" onclick="removeSlot('${avail._id}', '${startDate.toISOString()}', '${timeFrom.toTimeString().slice(0,5)}')">Remove</button>`;
+
+                                const row = `<tr>
+                                    <td>${startDate.toLocaleDateString()}</td>
+                                    <td>${timeFrom.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</td>
+                                    <td>${nextSlot.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</td>
+                                    <td>${avail.service}</td>
+                                    <td>${statusHTML}</td>
+                                </tr>`;
+                                tableBody.innerHTML += row;
+
+                                timeFrom = nextSlot; // Move to next time slot
+                            }
+                            startDate.setDate(startDate.getDate() + 1);
+                        }
                     });
 
-                    // Hide loading message
                     document.getElementById('loading').style.display = 'none';
                 })
                 .catch(error => {
@@ -73,7 +107,21 @@
                     document.getElementById('loading').innerText = 'Failed to load availability data.';
                 });
         });
-        ///
+
+        function removeSlot(id, date, timeFrom) {
+            if (!confirm(`Are you sure you want to remove this slot on ${date} at ${timeFrom}?`)) return;
+
+            fetch(`http://localhost:3000/api/availability/${id}`, {
+                method: "DELETE",
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+                location.reload(); // Refresh to update table
+            })
+            .catch(error => console.error("Error removing slot:", error));
+        }
+        
     </script>
 </body>
 </html>
