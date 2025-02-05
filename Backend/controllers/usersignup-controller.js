@@ -23,7 +23,7 @@ exports.userSignup = async (req, res) => {
             phonenumber,
             age,
             gender,
-            password,
+            password: hashedPassword,
             profilePicture: profilePicturePath,
         });
 
@@ -98,3 +98,4 @@ exports.deleteUser = (req, res) => {
         })
         .catch(err => res.status(500).json({ message: "Error deleting user: " + err.message }));
 };
+
