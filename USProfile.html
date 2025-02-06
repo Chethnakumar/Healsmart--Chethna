@@ -350,6 +350,24 @@
         }
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
+    const userId = "USER_ID_HERE"; // Replace this with actual logged-in user ID
+
+    fetch(`http://localhost:3000/api/usersignup/${userId}`)
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById("name").value = user.name;
+            document.getElementById("email").value = user.email;
+            document.getElementById("phonenumber").value = user.phonenumber;
+            document.getElementById("age").value = user.age;
+            document.getElementById("gender").value = user.gender;
+            document.getElementById("bloodGroup").value = user.bloodGroup; // ✅ Display Blood Group
+            document.getElementById("profilePicturePreview").src = `http://localhost:3000/${user.profilePicture}`;
+        })
+        .catch(error => console.error("Error fetching user data:", error));
+});
+
+
     function showSuccessMessage(event) {
         event.preventDefault();
         const successMessage = document.getElementById('success-message');

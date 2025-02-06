@@ -57,31 +57,37 @@ exports.getAllUsers = (req, res) => {
 };
 
 // Update User
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
     const userId = req.params.id;
-     console.log("User ID",userId);
-    // Prepare the updated fields
-    const updatedFields = {
-        name: req.body.name,
-        email: req.body.email,
-        phonenumber: req.body.phonenumber,
-        age: req.body.age,
-        gender: req.body.gender,
-        password: req.body.password, // Update password (ensure hashing in real applications)
-        profilePicture: req.file ? req.file.path : undefined // Optional field
-    };
 
-    console.log("Updated fields:", updatedFields);
-    
-    // Find and update the user by ID
-    User.findByIdAndUpdate(userId, updatedFields, { new: true }) // `new: true` ensures it returns the updated document
-        .then(updatedUser => {
-            if (!updatedUser) {
-                return res.status(404).json({ message: "User not found" });
-            }
-            res.json(updatedUser);
-        })
-        .catch(err => res.status(500).json({ message: "Error updating user: " + err.message }));
+    try {
+        let user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Update fields only if provided
+        if (req.body.name) user.name = req.body.name;
+        if (req.body.email) user.email = req.body.email;
+        if (req.body.phonenumber) user.phonenumber = req.body.phonenumber;
+        if (req.body.age) user.age = req.body.age;
+        if (req.body.gender) user.gender = req.body.gender;
+
+        // Handle password update with hashing
+        if (req.body.password) {
+            user.password = await bcrypt.hash(req.body.password, 10);
+        }
+
+        // Handle profile picture update
+        if (req.file) {
+            user.profilePicture = req.file.path;
+        }
+
+        await user.save();
+        res.json({ message: "User updated successfully!", user });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating user: " + error.message });
+    }
 };
 
 

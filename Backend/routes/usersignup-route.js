@@ -14,7 +14,7 @@ router.get("/:id", getUser);
 router.get("/", getAllUsers);
 
 // PUT: Update User
-router.put("/user/:id", upload.single("profilePicture"), updateUser); // Update user route
+router.put("/:id", upload.single("profilePicture"), updateUser); // Update user route
 
 
 // DELETE: Delete User
